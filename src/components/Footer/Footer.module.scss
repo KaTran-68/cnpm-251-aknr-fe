@@ -1,0 +1,37 @@
+.footer {
+  background: #ffffff;
+  border-top: 1px solid #e9edf3;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerLeft { display: flex; align-items: center; }
+
+.logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.footerRight {
+  display: grid;
+  gap: 6px;
+  color: #3a4758;
+  text-align: right;
+}
+
+.contactRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.contactRow a {
+  color: #1a4aa5;
+  text-decoration: none;
+}
+
+.contactRow a:hover { text-decoration: underline; }

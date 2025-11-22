@@ -1,0 +1,170 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f6f8fb;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.headerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.btnBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #4a9fd8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btnBack:hover {
+  background: #3282c4;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #0b5a8e;
+  margin: 0 0 4px 0;
+}
+
+.subtitle {
+  color: #5a6c7d;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.heroSection {
+  background: linear-gradient(135deg, #4a9fd8 0%, #3282c4 100%);
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.pageTitle {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.searchBox {
+  width: 100%;
+  max-width: 600px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.tableCard {
+  width: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  background: #f3f4f6;
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  text-align: center;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.btnConfirm {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btnConfirm:hover {
+  background: #059669;
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding: 16px;
+  }
+
+  .heroSection {
+    padding: 24px 16px;
+  }
+
+  .pageTitle {
+    font-size: 28px;
+  }
+
+  .table {
+    min-width: 800px;
+  }
+}

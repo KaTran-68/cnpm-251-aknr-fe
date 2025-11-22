@@ -1,0 +1,71 @@
+@use "../../assets/styles/_variables" as *;
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: #f5f7fb;
+}
+
+.hero {
+	position: relative;
+	margin: 0;
+	border-radius: 0;
+	flex: 1;
+	/* Use bg.png as the hero background; keep a soft gradient overlay */
+	background: 
+		linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06)),
+		url('../../assets/images/bg.png') center/cover no-repeat;
+	background-position: top;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #fff;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 30px 20px 30px;
+	min-height: calc(100vh - 150px);
+}
+
+.title {
+	font-size: 40px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	text-align: center;
+	margin: 0;
+}
+
+.subtitle {
+	margin-top: 6px;
+	font-size: 20px;
+	opacity: 0.95;
+	text-align: center;
+}
+
+.actions {
+	position: relative;
+	width: 100%;
+	max-width: 900px;
+	height: 260px;
+	margin-top: 20px;
+}
+
+.actionLeft,
+.actionRight,
+.actionBottom { position: absolute; }
+
+.actionLeft { left: 60px; top: 20px; }
+.actionRight { right: 60px; top: 20px; }
+.actionBottom { left: 50%; transform: translateX(-50%); bottom: 10px; }
+
+
+
+@media (max-width: 992px) {
+	.actions { height: 260px; }
+	.actionLeft, .actionRight { position: static; margin: 10px; }
+	.actionBottom { position: static; transform: none; margin: 10px auto 0; display: block; }
+	.hero { padding: 40px 16px; }
+}
+
