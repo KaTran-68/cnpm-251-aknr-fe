@@ -1,4 +1,0 @@
-Ví dụ
-Button/
-│       ├── Button.js        # React component
-│       └── Button.module.scss # SCSS cho Button (module-scoped)
