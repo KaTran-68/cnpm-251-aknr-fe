@@ -1,0 +1,218 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f6f8fb;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  background: linear-gradient(135deg, #4a9fd8 0%, #3282c4 100%);
+  padding: 24px;
+  text-align: center;
+}
+
+.headerBox {
+  display: inline-block;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 4px 0;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #fff;
+  font-size: 18px;
+  opacity: 0.95;
+}
+
+.contentArea {
+  padding: 24px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.btnBack {
+  position: absolute;
+  left: 0;
+  background: #4a9fd8;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btnBack:hover {
+  background: #3282c4;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin: 0;
+  color: #1f2937;
+}
+
+.searchRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 300px;
+  padding: 10px 16px;
+  border: 1px solid #cbd5e0;
+  border-radius: 20px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.searchInput::placeholder {
+  color: #a0aec0;
+}
+
+.tableSection {
+  background: #fff;
+  border: 1px solid #dfe6ed;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tableHeader {
+  background: #f9fafb;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 1px solid #dfe6ed;
+  text-align: center;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background: #f5f7fa;
+  padding: 12px 10px;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #dfe6ed;
+  color: #4a5568;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.table td {
+  border: 1px solid #dfe6ed;
+  padding: 10px;
+  text-align: center;
+  color: #2d3748;
+  font-size: 13px;
+}
+
+.btnAccept {
+  background: #48bb78;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.btnAccept:hover {
+  background: #38a169;
+}
+
+.btnReject {
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.btnReject:hover {
+  background: #c53030;
+}
+
+.btnDetail {
+  background: #fbbf24;
+  color: #1f2937;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.btnDetail:hover {
+  background: #f59e0b;
+}
+
+@media (max-width: 992px) {
+  .contentArea {
+    padding: 16px;
+  }
+
+  .titleRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btnBack {
+    position: static;
+    align-self: flex-start;
+  }
+
+  .pageTitle {
+    font-size: 24px;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .table {
+    min-width: 1000px;
+  }
+}
