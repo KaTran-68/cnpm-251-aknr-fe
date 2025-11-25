@@ -1,0 +1,134 @@
+.transcript-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.transcript-modal {
+  background: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px 15px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.transcript-header h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #495057;
+  background: #f8f9fa;
+  border-radius: 50%;
+}
+
+.transcript-content {
+  padding: 20px 25px;
+}
+
+.info-section, .attendees-section, .agenda-section, 
+.keypoints-section, .homework-section, .next-session-section {
+  margin-bottom: 25px;
+}
+
+.transcript-content h5 {
+  color: #495057;
+  margin-bottom: 12px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.info-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.info-grid div {
+  padding: 5px 0;
+}
+
+.attendees-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 20px;
+}
+
+.attendees-list li {
+  padding: 4px 0;
+  break-inside: avoid;
+}
+
+.agenda-list, .keypoints-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.agenda-list li, .keypoints-list li {
+  padding: 4px 0;
+  line-height: 1.4;
+}
+
+.homework-content, .next-session-content {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid #007bff;
+}
+
+.transcript-footer {
+  padding: 15px 25px;
+  background: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .transcript-modal {
+    width: 95%;
+    margin: 10px;
+  }
+  
+  .attendees-list {
+    columns: 1;
+  }
+  
+  .transcript-header, .transcript-content {
+    padding: 15px 20px;
+  }
+}

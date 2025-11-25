@@ -1,0 +1,82 @@
+@import '../../../assets/styles/_variables.scss';
+
+.wrapper {
+  background: linear-gradient(#eaf6ff, #fff);
+  padding: 26px 0 40px;
+  min-height: 100%;
+  width: 100%;
+}
+
+.contentFrame {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid #2a82bd;
+  border-radius: 8px;
+}
+
+.leftSidebar {
+  flex: 0 0 200px;
+  background: #e0e0e0;
+  padding: 16px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.centerContent {
+  flex: 1;
+  background: #d1eefc;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.rightSidebar {
+  flex: 0 0 250px;
+  background: #d1eefc;
+  padding: 16px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebarItem label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.optionRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.optionLabel {
+  font-weight: bold;
+  width: 20px;
+}
+
+.questionNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.actionButtons .btn {
+  font-size: 12px;
+  padding: 6px 10px;
+}

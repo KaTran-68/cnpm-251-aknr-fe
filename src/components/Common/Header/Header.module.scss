@@ -1,0 +1,48 @@
+.header {
+  background: #fff;
+  border-bottom: 6px solid #2a82bd;
+  padding: 14px 0;
+}
+.container {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: relative;
+}
+.left {
+  flex: 0 0 140px;
+  display: flex;
+  align-items: center;
+}
+.center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.right {
+  flex: 0 0 80px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #2a82bd;
+}
+.logo {
+  background: #2a82bd;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+}
+.subtitle {
+  font-size: 14px;
+  color: #2a82bd;
+}
+
+h1 {
+  margin: 0;
+  font-size: 34px;
+  color: #1c6fa0;
+  font-weight: 700;
+}

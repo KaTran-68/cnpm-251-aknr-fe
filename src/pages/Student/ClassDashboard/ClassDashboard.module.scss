@@ -1,0 +1,116 @@
+@import '../../../assets/styles/_variables.scss';
+
+.wrapper {
+	background: linear-gradient(#eaf6ff, #fff);
+	padding: 26px 0 40px;
+	min-height: 100%;
+	width: 100%;
+}
+.hero {
+	max-width: 1200px;
+	width: min(1200px, calc(100% - 32px));
+	margin: 0 auto;
+	padding: 10px;
+}
+.contentFrame {
+	border: 6px solid #2a82bd;
+	border-radius: 6px;
+	padding: 18px;
+	background: linear-gradient(#ffffff, #f8fbff);
+}
+
+.card {
+	background: #fff;
+	border-radius: 6px;
+	padding: 22px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.sessionTitle {
+	background: #fff;
+	padding: 12px 14px;
+	border-radius: 6px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+	margin-bottom: 12px;
+}
+.meta {
+	color: #666;
+	margin-top: 6px;
+}
+.metaSmall {
+	color: #999;
+	margin-top: 6px;
+	font-size: 13px;
+}
+.studentInfoBar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+	background: #f0f8ff;
+	border: 1px solid #d6ecff;
+	border-radius: 6px;
+}
+.studentName {
+	font-weight: 600;
+	color: #0b4f7c;
+}
+.studentId {
+	color: #0b4f7c;
+}
+.notLoggedIn {
+	color: #666;
+	font-style: italic;
+}
+.accordion {
+	margin-top: 12px;
+}
+.item {
+	margin-top: 10px;
+}
+.itemHeader {
+	width: 100%;
+	text-align: left;
+	background: #f1f4f6;
+	padding: 12px 16px;
+	border: 1px solid #e6e9eb;
+	border-radius: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.itemBody {
+	padding: 12px 16px 20px;
+	background: #fff;
+}
+
+.itemHeader > div:first-child { font-weight: 600; }
+
+/* Quiz list styles */
+.quizList {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.quizRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.quizName {
+	flex: 1 1 auto;
+	padding: 10px 14px;
+	border: 1px solid #e6e9eb;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+}
+.quizAction {
+	flex: 0 0 auto;
+}
+.quizAction .btn {
+	min-width: 56px;
+	border-radius: 8px;
+}
+
