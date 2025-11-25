@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './App.css';
 import AppRoutes from './routes/AppRoutes';
 import Header from './components/Common/Header/Header';
@@ -16,3 +17,12 @@ function App() {
 }
 
   export default App;
+=======
+import AppRoutes from "./routes/AppRoutes";
+
+function App() {
+  return <AppRoutes />;
+}
+
+export default App;
+>>>>>>> ea8a994 (FE cua Ton)
