@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styles from './ManageClassTutor.module.scss';
+import styles from './ClassManager.module.scss';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import AttendanceListModal from '../../components/AttendanceListModal/AttendanceListModal';
-import MinutesCreateModal from '../../components/MinutesCreateModal/MinutesCreateModal';
+import AttendanceListModal from '../../../components/Tutor/AttendanceListModal/AttendanceListModal';
+import MinutesCreateModal from '../../../components/Tutor/MinutesCreateModal/MinutesCreateModal';
 
-const ManageClassTutor = () => {
+const ClassManager = () => {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState(-1);
   const [password, setPassword] = useState('');
@@ -145,4 +145,4 @@ const ManageClassTutor = () => {
   );
 };
 
-export default ManageClassTutor;
+export default ClassManager;

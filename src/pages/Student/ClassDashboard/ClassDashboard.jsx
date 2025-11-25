@@ -1,15 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import styles from './ManageClass.module.scss';
-import AttendanceModal from '../../components/AttendanceModal/AttendanceModal';
-import Notification from '../../components/Notification/Notification';
+import styles from './ClassDashboard.module.scss';
+import AttendanceModal from '../../../components/Student/AttendanceModal/AttendanceModal';
+import Notification from '../../../components/Common/Notification/Notification';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { confirmAttendance } from '../../services/attendance';
-import MockAuthService from '../../services/mockAuth';
-import MockDataProvider from '../../services/mockData';
-import MockLoginModal from '../../components/MockLoginModal/MockLoginModal';
-import FeedbackModal from '../../components/FeedbackModal/FeedbackModal';
-import TranscriptModal from '../../components/TranscriptModal/TranscriptModal';
+import { confirmAttendance } from '../../../services/attendance';
+import MockAuthService from '../../../services/mockAuth';
+import MockDataProvider from '../../../services/mockData';
+import MockLoginModal from '../../../components/Common/MockLoginModal/MockLoginModal';
+import FeedbackModal from '../../../components/Student/FeedbackModal/FeedbackModal';
+import TranscriptModal from '../../../components/Student/TranscriptModal/TranscriptModal';
 
 const sections = [
   { title: 'Điểm danh', key: 'attendance' },
@@ -18,7 +18,7 @@ const sections = [
   { title: 'Xem biên bản buổi học', key: 'minutes' },
 ];
 
-const ManageClass = () => {
+const ClassDashboard = () => {
   const [openIndex, setOpenIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [notification, setNotification] = useState({ show: false, message: '' });
@@ -293,4 +293,4 @@ const ManageClass = () => {
   );
 };
 
-export default ManageClass;
+export default ClassDashboard;

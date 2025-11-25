@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MockAuthService from '../../services/mockAuth';
+import MockAuthService from '../../../services/mockAuth';
 import './MockLoginModal.css';
 
 const MockLoginModal = ({ show, onClose, onLoginSuccess }) => {

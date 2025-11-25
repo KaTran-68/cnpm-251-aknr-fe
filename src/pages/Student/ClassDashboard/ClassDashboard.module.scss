@@ -1,11 +1,14 @@
-@import '../../assets/styles/_variables.scss';
+@import '../../../assets/styles/_variables.scss';
 
 .wrapper {
 	background: linear-gradient(#eaf6ff, #fff);
 	padding: 26px 0 40px;
+	min-height: 100%;
+	width: 100%;
 }
 .hero {
-	max-width: 1100px;
+	max-width: 1200px;
+	width: min(1200px, calc(100% - 32px));
 	margin: 0 auto;
 	padding: 10px;
 }
@@ -38,6 +41,28 @@
 	margin-top: 6px;
 	font-size: 13px;
 }
+.studentInfoBar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-bottom: 12px;
+	padding: 10px 14px;
+	background: #f0f8ff;
+	border: 1px solid #d6ecff;
+	border-radius: 6px;
+}
+.studentName {
+	font-weight: 600;
+	color: #0b4f7c;
+}
+.studentId {
+	color: #0b4f7c;
+}
+.notLoggedIn {
+	color: #666;
+	font-style: italic;
+}
 .accordion {
 	margin-top: 12px;
 }
@@ -61,4 +86,31 @@
 }
 
 .itemHeader > div:first-child { font-weight: 600; }
+
+/* Quiz list styles */
+.quizList {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.quizRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.quizName {
+	flex: 1 1 auto;
+	padding: 10px 14px;
+	border: 1px solid #e6e9eb;
+	border-radius: 8px;
+	background: #fff;
+	cursor: pointer;
+}
+.quizAction {
+	flex: 0 0 auto;
+}
+.quizAction .btn {
+	min-width: 56px;
+	border-radius: 8px;
+}
 

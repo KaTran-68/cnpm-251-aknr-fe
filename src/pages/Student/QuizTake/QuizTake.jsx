@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './QuizTake.module.scss';
-import { getQuizById, submitQuiz } from '../../services/quizzes';
+import { getQuizById, submitQuiz } from '../../../services/quizzes';
 
 const QuizTake = () => {
   const { quizId } = useParams();
