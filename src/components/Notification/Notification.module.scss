@@ -1,0 +1,31 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 120px;
+  z-index: 2000;
+}
+.tag {
+  pointer-events: auto;
+  background: #f8fff4;
+  border: 1px solid #66bb6a;
+  color: #145214;
+  padding: 14px 18px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(18, 72, 31, 0.12);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 320px;
+  max-width: 520px;
+}
+.message {
+  flex: 1 1 auto;
+  font-weight: 600;
+}
+.actions {
+  flex: 0 0 auto;
+}
