@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TopBar from "../../components/layout/TopBar/TopBar";
 import Footer from "../../components/layout/Footer/Footer";
-import StudentDetailModal from "../../components/common/StudentDetailModal/StudentDetailModal";
+import StudentDetailModal from "../../components/Common/StudentDetailModal/StudentDetailModal";
 import styles from "./StudentList.module.scss";
 
 const registeredStudents = [
@@ -92,7 +92,7 @@ const StudentList = () => {
         <div className={styles.contentArea}>
           <div className={styles.titleRow}>
             <button className={styles.btnBack} onClick={() => navigate(-1)}>
-              ← Quay lại
+                ← Quay lại
             </button>
             <h2 className={styles.pageTitle}>DANH SÁCH SINH VIÊN</h2>
           </div>

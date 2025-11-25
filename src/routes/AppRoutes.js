@@ -10,6 +10,10 @@ import LoginForm from "../pages/LoginForm/LoginForm";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import AccountDashboard from "../pages/AccountDashboard/AccountDashboard";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ClassDashboard from "../pages/Student/ClassDashboard/ClassDashboard";
+import QuizTake from "../pages/Student/QuizTake/QuizTake";
+import ClassManager from "../pages/Tutor/ClassManager/ClassManager";
+import QuizCreate from "../pages/Tutor/QuizCreate/QuizCreate";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +29,10 @@ const AppRoutes = () => {
         <Route path="/confirm" element={<ConfirmSchedule />} />
         <Route path="/students" element={<StudentList />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/class" element={<ClassDashboard/>} />
+        <Route path="/class/quiz/:quizId" element={<QuizTake />} />
+        <Route path="/class/tutor" element={<ClassManager />} />
+        <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
       </Routes>
     </Router>
   );

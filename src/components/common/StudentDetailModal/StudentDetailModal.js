@@ -62,5 +62,4 @@ const StudentDetailModal = ({ student, onClose }) => {
     </div>
   );
 };
-
 export default StudentDetailModal;
