@@ -11,12 +11,22 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
+<<<<<<< HEAD
         <Route path="/" element={<RoleSelect />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+=======
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<RoleSelect />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path=":role/home" element={<Home />} />
         <Route path=":role/account" element={<AccountDashboard />} />
         <Route path=":role/change-password" element={<ChangePassword />} />
+        <Route path="/register" element={<RegisterSchedule />} />
+        <Route path="/view" element={<ViewSchedule />} />
+        <Route path="/confirm" element={<ConfirmSchedule />} />
+        <Route path="/students" element={<StudentList />} />
+>>>>>>> 9a8d80c (comment home Tri)
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );
