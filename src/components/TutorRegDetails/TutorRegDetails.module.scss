@@ -1,0 +1,16 @@
+.overlay{ position:fixed; inset:0; background:rgba(0,0,0,0.45); display:flex; justify-content:center; align-items:center; z-index:999 }
+.modal{ width:480px; background:#fff; border-radius:10px; padding:18px 22px; position:relative }
+.closeBtn{ position:absolute; right:12px; top:10px; border:none; background:none; cursor:pointer }
+.title{ font-size:18px; margin:0 0 8px }
+.section{ border-top:1px solid #eee; padding:12px 0 }
+.row{ display:flex; align-items:center; gap:8px; color:#444 }
+.infoGrid{ display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; margin-top:8px }
+.label{ font-size:12px; color:#888; margin:0 0 6px }
+.rowBetween{ display:flex; justify-content:space-between; align-items:center; margin-top:8px }
+.status{ padding:6px 10px; border-radius:8px; font-weight:700 }
+
+/* status key classes (match other status pills) */
+.pending{ background:#fff7c4; color:#b89c00 }
+.approved{ background:#d6ffe1; color:#1b9c52 }
+.rejected{ background:#ffd6d6; color:#c72828 }
+.footerNote{ color:#d54; font-weight:700; margin-top:12px; text-align:center }

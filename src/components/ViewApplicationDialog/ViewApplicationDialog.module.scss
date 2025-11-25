@@ -1,0 +1,117 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  width: 650px;
+  background: white;
+  border-radius: 15px;
+  padding: 30px 40px;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.badge {
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* trạng thái */
+.Pending {
+  background: #fff7c4;
+  color: #b89c00;
+}
+
+.Approved {
+  background: #d6ffe1;
+  color: #1b9c52;
+}
+
+.Rejected {
+  background: #ffd6d6;
+  color: #c72828;
+}
+
+/* lowercase aliases for statusKey-based lookup */
+.pending { @extend .Pending; }
+.approved { @extend .Approved; }
+.rejected { @extend .Rejected; }
+
+/* avatar */
+.avatarBox {
+  position: absolute;
+  right: 40px;
+  top: 60px;
+}
+
+.avatarBox img {
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* section */
+.section {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 1px solid #ccc;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+label {
+  color: #777;
+  font-weight: 500;
+}
+
+p {
+  margin: 5px 0 0 0;
+  font-size: 16px;
+}
+
+/* contact icons */
+.section p svg {
+  margin-right: 8px;
+  color: #444;
+}

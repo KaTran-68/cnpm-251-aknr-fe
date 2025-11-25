@@ -1,0 +1,103 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* STATUS TAG */
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Colors giống Figma */
+.pending {
+  background: #fff5ba;
+  color: #a68b00;
+}
+
+.approved {
+  background: #d4f5d8;
+  color: #0e8f39;
+}
+
+.rejected {
+  background: #ffd5d5;
+  color: #c72c2c;
+}
+
+/* ACTION BUTTONS */
+
+.actionCol {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.actionBtn {
+  border: none;
+  background: none;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.view {
+  color: #000000;
+}
+
+.approve {
+  color: #1aa74a;
+}
+
+.reject {
+  color: #d93636;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  font-size: 16px;
+}
+
+.pageBtn {
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 6px 10px;
+
+  &:hover {
+    color: #0077cc;
+  }
+}
+
+.pageNumber {
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: white;
+  font-weight: 500;
+
+  &:hover {
+    background: #f2f2f2;
+  }
+}
+
+.active {
+  background: #000;
+  color: white;
+  border-color: black;
+}

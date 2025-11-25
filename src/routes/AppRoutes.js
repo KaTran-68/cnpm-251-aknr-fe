@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
@@ -39,3 +40,23 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
+=======
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TutorList from "../pages/TutorManagement/TutorList";
+import ClassList from "../pages/ClassManagement/ClassList";
+import TutorRegistration from "../pages/TutorRegistration/TutorRegistration";
+import SubmittedProfiles from "../pages/SubmittedProfiles/SubmittedProfiles";
+import Home from "../pages/HomeCandidatePage/HomeCandidatePage";
+
+export default function AppRoutes() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/TutorRegistration" element={<TutorRegistration />} />
+        <Route path="/SubmittedProfiles" element={<SubmittedProfiles />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+>>>>>>> ea8a994 (FE cua Ton)

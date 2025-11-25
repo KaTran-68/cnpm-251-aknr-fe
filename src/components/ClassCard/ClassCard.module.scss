@@ -1,0 +1,99 @@
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 22px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Tên tutor */
+.className {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+/* Môn học */
+.subject {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+/* STATUS TAG */
+.statusTag {
+  font-size: 12px;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusUpcoming {
+  background: #f4e5ff;
+  color: #a20dd0;
+}
+
+.statusOngoing {
+  background: #e7ffe8;
+  color: #0da640;
+}
+
+.statusEnded {
+  background: #ffe2e2;
+  color: #d81c1c;
+}
+
+/* INFO */
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
+.icon {
+  color: #555;
+}
+
+/* Divider */
+.divider {
+  margin: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Student section */
+.studentLabel {
+  color: #777;
+  font-size: 14px;
+}
+
+.studentName {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+/* Button */
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.detailBtn {
+  background: white;
+  border: 1px solid #000;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
