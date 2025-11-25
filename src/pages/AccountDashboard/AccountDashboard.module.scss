@@ -1,0 +1,79 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #43a6cf;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+.logo {
+  height: 48px;
+  cursor: pointer;
+}
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+}
+.avatar {
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  background: #e3f2fd;
+  object-fit: cover;
+}
+.body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  background: #fff;
+  border-radius: 36px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 3vw 4vw;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vw;
+}
+.actionBtn {
+  width: 100%;
+  background: #004d5a;
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 4px;
+  padding: 1.2rem 0;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.actionBtn:hover {
+  background: #1976d2;
+}
+.logoutBtn {
+  background: none;
+  color: #007a99;
+  font-size: 1.3rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  text-decoration: underline;
+}
+.logoutBtn:hover {
+  color: #004d5a;
+}

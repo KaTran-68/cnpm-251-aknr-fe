@@ -9,10 +9,10 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ClassDashboard />} />
-        <Route path="/quiz/:quizId" element={<QuizTake />} />             
-        <Route path="/tutor" element={<ClassManager />} />
-        <Route path="/tutor/create-quiz" element={<QuizCreate />} />
+        <Route path="/class" element={<ClassDashboard/>} />
+        <Route path="/class/quiz/:quizId" element={<QuizTake />} />
+        <Route path="/class/tutor" element={<ClassManager />} />
+        <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
       </Routes>
     </Router>
   );
