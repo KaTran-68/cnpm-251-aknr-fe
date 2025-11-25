@@ -15,17 +15,16 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RoleSelect />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path=":role/home" element={<Home />} />
+        <Route path=":role/account" element={<AccountDashboard />} />
+        <Route path=":role/change-password" element={<ChangePassword />} />
         <Route path="/register" element={<RegisterSchedule />} />
         <Route path="/view" element={<ViewSchedule />} />
         <Route path="/confirm" element={<ConfirmSchedule />} />
         <Route path="/students" element={<StudentList />} />
-        <Route path="/" element={<RoleSelect />} />
-        <Route path="/login" element={<LoginForm />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path=":role/home" element={<Home />} />
-        <Route path=":role/account" element={<AccountDashboard />} />
-        <Route path=":role/change-password" element={<ChangePassword />} />
       </Routes>
     </Router>
   );
