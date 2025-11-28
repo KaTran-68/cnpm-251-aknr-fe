@@ -42,7 +42,6 @@ const AppRoutes = () => {
         {/* <Route path="/" element={<Navigate to="/spaces" replace />} />
         <Route path="/spaces" element={<ScheduleView />} />
         <Route path="/register-schedule" element={<RegisterSchedule />} />
-        
         <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
       </Routes>
     </Router>

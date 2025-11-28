@@ -1,66 +1,149 @@
-import React from 'react';
-import styles from './TutorRegistration.module.scss';
+import React, { useState } from "react";
+import styles from "./TutorRegistration.module.scss";
 
 export default function TutorRegistration() {
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    role: "student",
+    idCode: "",
+    phone: "",
+    faculty: "",
+    major: "",
+    description: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+    if (type === "radio") {
+      setForm((prev) => ({ ...prev, [name]: value }));
+      return;
+    }
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const isValid = () => {
+    if (!form.fullName.trim()) return false;
+    if (!form.email.trim()) return false;
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isValid()) return;
+    console.log("submit", form);
+    // TODO: gọi API submit
+  };
+
   return (
-    <div className={styles.pageContainer}>
+    <div className={styles.page}>
       <div className={styles.card}>
         <h2 className={styles.title}>Hoàn tất đơn đăng ký</h2>
 
-        <form>
-          <div className={styles.formGrid}>
-            <div>
-              <label className={styles.label}>Họ và Tên</label>
-              <input className={styles.input} />
-            </div>
+        <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <label className={styles.label}>Họ và Tên</label>
+          <input
+            className={styles.input}
+            name="fullName"
+            value={form.fullName}
+            onChange={handleChange}
+            placeholder="Nguyễn Văn A"
+          />
 
-            <div>
-              <label className={styles.label}>Địa chỉ Gmail (đuôi @hcmut.edu.vn)</label>
-              <input className={styles.input} />
-            </div>
+          <label className={styles.label}>Địa chỉ Gmail (đuôi @hcmut.edu.vn)</label>
+          <input
+            className={styles.input}
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            placeholder="abc@hcmut.edu.vn"
+            type="email"
+          />
 
-            <div className={styles.fullRow}>
-              <label className={styles.label}>Sinh viên/Cán bộ</label>
-              <div className={styles.radioGroup}>
-                <label><input type="radio" name="role" /> Sinh viên</label>
-                <label><input type="radio" name="role" /> Cán bộ</label>
+          <div className={styles.row}>
+            <div className={styles.radioGroup}>
+              <div className={styles.label}>Sinh viên/Cán bộ</div>
+              <div className={styles.radioOptions}>
+                <label className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="student"
+                    checked={form.role === "student"}
+                    onChange={handleChange}
+                  />
+                  <span>Sinh viên</span>
+                </label>
+
+                <label className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="staff"
+                    checked={form.role === "staff"}
+                    onChange={handleChange}
+                  />
+                  <span>Cán bộ</span>
+                </label>
               </div>
             </div>
 
-            <div>
-              <label className={styles.label}>Mã số sinh viên/ Mã số cán bộ</label>
-              <input className={styles.input} />
+            <div className={styles.flexItem}>
+              <label className={styles.label}>Mã số sinh viên / Mã số cán bộ</label>
+              <input
+                className={styles.input}
+                name="idCode"
+                value={form.idCode}
+                onChange={handleChange}
+                placeholder="12345678"
+              />
             </div>
-
-            <div>
-              <label className={styles.label}>Số điện thoại</label>
-              <input className={styles.input} />
-            </div>
-
-            <div className={styles.fullRow}>
-              <label className={styles.label}>Khoa</label>
-              <input className={styles.input} />
-            </div>
-
-            <div className={styles.fullRow}>
-              <label className={styles.label}>Ngành</label>
-              <input className={styles.input} />
-            </div>
-
-            <div className={styles.fullRow}>
-              <label className={styles.label}>Mô tả đôi nét về khả năng dạy học</label>
-              <textarea className={styles.textarea} />
-            </div>
-
-            <div className={styles.fullRow}>
-              <div className={styles.helper}>Bạn có thể bổ sung tài liệu minh chứng sau khi được duyệt.</div>
-            </div>
-
           </div>
 
-          <div className={styles.actionRow}>
-            <button type="button" className={styles.submitBtn}>Tiếp tục</button>
-          </div>
+          <label className={styles.label}>Số điện thoại</label>
+          <input
+            className={styles.input}
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            placeholder="(84) 9xx xxx xxx"
+          />
+
+          <label className={styles.label}>Khoa</label>
+          <input
+            className={styles.input}
+            name="faculty"
+            value={form.faculty}
+            onChange={handleChange}
+            placeholder="Khoa Công nghệ Thông tin"
+          />
+
+          <label className={styles.label}>Ngành</label>
+          <input
+            className={styles.input}
+            name="major"
+            value={form.major}
+            onChange={handleChange}
+            placeholder="Kỹ thuật phần mềm"
+          />
+
+          <label className={styles.label}>Mô tả đôi nét về khả năng dạy học</label>
+          <textarea
+            className={styles.textarea}
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+            placeholder="Kinh nghiệm, môn dạy, mức độ..."
+          />
+
+          <button
+            className={styles.submitBtn}
+            type="submit"
+            disabled={!isValid()}
+            aria-disabled={!isValid()}
+          >
+            Tiếp tục
+          </button>
         </form>
       </div>
     </div>
