@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./TutorSelection.module.scss";
 import TutorDetailModal from "../../components/Tutor/TutorDetailModal/TutorDetailModal";
-
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 /**
  * Updated TutorSelection: click card -> open TutorDetailModal
  * Make sure path ../../components/... matches repo layout
@@ -90,6 +91,8 @@ export default function TutorSelection() {
   }
 
   return (
+    <>
+    <Header/>
     <div className={styles.page}>
       <div className={styles.frameBg}>
         <div className={styles.searchBar}>
@@ -142,6 +145,7 @@ export default function TutorSelection() {
           </div>
         </div>
       </div>
+    <Footer />
 
       <TutorDetailModal
         open={modalOpen}
@@ -151,5 +155,6 @@ export default function TutorSelection() {
         registering={registering}
       />
     </div>
+  </>
   );
 }

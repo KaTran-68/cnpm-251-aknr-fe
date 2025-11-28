@@ -24,8 +24,8 @@ function Home() {
   let bodyContent;
   if (role === 'student') {
     bodyContent = (
-      <button className={styles.tutorBtn}>Đăng ký chọn Tutor</button>
-    );
+      <button className={styles.tutorBtn} onClick={() => navigate('/tutor-selection')}>Đăng ký chọn Tutor</button>
+    );  
   } else if (role === 'tutor') {
     bodyContent = (
       <>

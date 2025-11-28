@@ -16,6 +16,7 @@ import ClassManager from "../pages/Tutor/ClassManager/ClassManager";
 import QuizCreate from "../pages/Tutor/QuizCreate/QuizCreate";
 import TutorRegistration from "../pages/TutorRegistration/TutorRegistration";
 import SubmittedProfiles from "../pages/SubmittedProfiles/SubmittedProfiles";
+import TutorSelection from "../pages/TutorSelection/TutorSelection";
 
 const AppRoutes = () => {
   return (
@@ -37,11 +38,12 @@ const AppRoutes = () => {
         <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
         <Route path="/TutorRegistration" element={<TutorRegistration />} />
         <Route path="/SubmittedProfiles" element={<SubmittedProfiles />} />
-//         <Route path="/" element={<Navigate to="/spaces" replace />} />
-//         <Route path="/spaces" element={<ScheduleView />} />
-//         <Route path="/register-schedule" element={<RegisterSchedule />} />
-//         <Route path="/tutor-selection" element={<TutorSelection />} />
-//         <Route path="*" element={<Navigate to="/spaces" replace />} />
+        <Route path="/tutor-selection" element={<TutorSelection />} />
+        {/* <Route path="/" element={<Navigate to="/spaces" replace />} />
+        <Route path="/spaces" element={<ScheduleView />} />
+        <Route path="/register-schedule" element={<RegisterSchedule />} />
+        
+        <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
       </Routes>
     </Router>
   );
