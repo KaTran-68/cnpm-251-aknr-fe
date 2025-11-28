@@ -3,6 +3,8 @@ import styles from "./TutorSelection.module.scss";
 import TutorDetailModal from "../../components/Tutor/TutorDetailModal/TutorDetailModal";
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import { UNSAFE_DataWithResponseInit } from "react-router-dom";
+import { getTutorData } from "../../services/api";
 /**
  * Updated TutorSelection: click card -> open TutorDetailModal
  * Make sure path ../../components/... matches repo layout
@@ -59,7 +61,13 @@ export default function TutorSelection() {
   const [registering, setRegistering] = useState(false);
 
   useEffect(() => {
-    setTutors(MOCK);
+    const fetchData = async () => {
+      const response = await getTutorData();
+      if (response.success) {
+        setTutors(response.data);
+      }
+    };
+    fetchData();
   }, []);
 
   const filtered = tutors.filter((t) =>
@@ -103,12 +111,6 @@ export default function TutorSelection() {
             placeholder="Tìm kiếm môn học hoặc tên tutor..."
             aria-label="Tìm kiếm môn học hoặc tên tutor"
           />
-          <button
-            className={styles.confirmBtn}
-            onClick={() => alert("Demo xác nhận")}
-          >
-            Xác nhận
-          </button>
         </div>
 
         <div className={styles.listWrap}>

@@ -39,6 +39,9 @@ function LoginForm() {
       else {
         navigate("/student/home");
       }
+      localStorage.setItem('username', username);
+      localStorage.setItem('role', role);
+      localStorage.setItem('auth', true);
     }
     else{
       setError('Tên đăng nhập hoặc mật khẩu không đúng.');

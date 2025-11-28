@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TutorRegistration.module.scss';
 import Header from '../../components/Header/Header';
+import { useState } from 'react';
 
 export default function TutorRegistration() {
   const [form, setForm] = useState({
@@ -65,8 +66,8 @@ export default function TutorRegistration() {
 
           <div className={styles.row}>
             <div className={styles.radioGroup}>
-              <div className={styles.label}>Sinh viên/Cán bộ</div>
-              <div className={styles.radioOptions}>
+              <div className={styles.label} style={{ textAlign: 'center', width: '100%' }}>Sinh viên/Cán bộ</div>
+              <div className={styles.radioOptions} style={{ display: 'flex', justifyContent: 'center', gap: '2rem' }}>
                 <label className={styles.radioLabel}>
                   <input
                     type="radio"
@@ -77,7 +78,6 @@ export default function TutorRegistration() {
                   />
                   <span>Sinh viên</span>
                 </label>
-
                 <label className={styles.radioLabel}>
                   <input
                     type="radio"

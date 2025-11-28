@@ -3,8 +3,6 @@ import styles from './AccountDashboard.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 
-
-
 function AccountDashboard({}) {
   const { role } = useParams();
   const navigate = useNavigate();
@@ -14,7 +12,7 @@ function AccountDashboard({}) {
     navigate('/');
   }
   function onRegister() {
-    navigate('/TutorRegistration');
+    navigate('/tutor-registration');
   }
 
   useEffect(() => {
@@ -30,7 +28,7 @@ function AccountDashboard({}) {
     navigate(`/${role}/home`);
     };
   return (
-   <div className={styles.container}>
+    <div className={styles.container}>
       <Header />
       <div className={styles.content}>
         <h2 className={styles.title}>QUẢN LÝ TÀI KHOẢN</h2>
@@ -41,6 +39,10 @@ function AccountDashboard({}) {
               <button className={styles.actionBtn} onClick={onRegister}>Đăng ký làm Tutor</button>
             )}
             <button className={styles.actionBtn} onClick={onLogout}>Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
