@@ -1,4 +1,5 @@
 import axios from "axios";
+import { data } from "react-router-dom";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:6868";
 
@@ -10,7 +11,7 @@ const api = axios.create({
 });
 
 export const getUserProfile = async () => {
-  try{
+  try {
     const response = await api.get("/api/students");
     console.log("User profile data:", response.data);
     return response.data;
@@ -24,26 +25,29 @@ export const AuthLogin = async (username, password, role) => {
     if (role === 'admin') {
       const response = await api.post("/api/login/admin", { username, password });
       return response.data;
-    }else if (role === 'student') {
+    } else if (role === 'student') {
       const response = await api.post("/api/login/student", { username, password });
       return response.data;
     }
     else if (role === 'teacher') {
       const response = await api.post("/api/login/teacher", { username, password });
-      return response.data; 
+      return response.data;
     }
     else if (role === 'tutor') {
       const response = await api.post("/api/login/tutor", { username, password });
       return response.data;
     }
-
   } catch (error) {
-    console.error("Login error:", error);
-    throw error;
+    if (error.status == 401) {
+      return { auth: false, data: "Thông tin đăng nhập không đúng" };
+    }
+    else if (error.status == 400) {
+      return { auth: false, data: "Vui lòng nhập tài khoản và mật khẩu" };
+    }
   }
 }
 export const getTutorData = async () => {
-  try{
+  try {
     const response = await api.get("/api/tutor");
     return response.data;
   } catch (error) {

@@ -4,7 +4,7 @@ import styles from "./ScheduleView.module.scss";
 import StatsCard from "../../components/StatsCard/StatsCard";
 import ScheduleClassCard from "../../components/Schedule_ClassCard/Schedule_ClassCard";
 import Header from "../../components/Header/Header";
-
+import { getClassData } from "../../services/api";
 /**
  * ScheduleView - updated: khi nhấn nút 'Đăng ký lịch học' sẽ navigate tới /register-schedule
  */
@@ -46,21 +46,32 @@ export default function ScheduleView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setClasses(MOCK_CLASSES);
+    async function fetchClasses() {
+      try {
+        const data = await getClassData();
+        if (data.success) {
+          setClasses(data.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch class data:", error);
+        setClasses(MOCK_CLASSES); // fallback to mock data on error
+      }}
+    fetchClasses();
   }, []);
 
   const stats = {
     total: classes.length,
-    upcoming: classes.filter((c) => c.status === "upcoming").length,
-    live: classes.filter((c) => c.status === "live").length,
-    finished: classes.filter((c) => c.status === "finished").length,
-    pending: classes.filter((c) => c.status === "pending").length,
+    upcoming: classes.filter((c) => c.status === "Upcoming").length,
+    cancel: classes.filter((c) => c.status === "Cancel").length,
+    finished: classes.filter((c) => c.status === "Done").length,
+    pending: classes.filter((c) => c.status === "Pending").length,
   };
 
   const filtered = classes.filter((c) => {
+    if (c.status === "Available") return false;
     if (
       q &&
-      !`${c.title} ${c.tutor} ${c.dateLabel}`
+      !`${c.subject} ${c.tutor} ${c.date}`
         .toLowerCase()
         .includes(q.toLowerCase())
     )
@@ -83,9 +94,9 @@ export default function ScheduleView() {
         <div className={styles.statsRow}>
           <StatsCard title="Tổng số lớp" value={stats.total} />
           <StatsCard title="Sắp diễn ra" value={stats.upcoming} tone="purple" />
-          <StatsCard title="Đang diễn ra" value={stats.live} tone="green" />
           <StatsCard title="Đã kết thúc" value={stats.finished} tone="red" />
           <StatsCard title="Chờ xác nhận" value={stats.pending} tone="yellow" />
+          <StatsCard title="Đã bị hủy" value={stats.cancel} tone="green" />
         </div>
 
         <div className={styles.controls}>
@@ -105,10 +116,10 @@ export default function ScheduleView() {
               onChange={(e) => setStatusFilter(e.target.value)}
             >
               <option value="all">Tình trạng: All</option>
-              <option value="upcoming">Sắp diễn ra</option>
-              <option value="live">Đang diễn ra</option>
-              <option value="finished">Đã kết thúc</option>
-              <option value="pending">Chờ xác nhận</option>
+              <option value="Upcoming">Sắp diễn ra</option>
+              <option value="Done">Đã kết thúc</option>
+              <option value="Pending">Chờ xác nhận</option>
+              <option value="Cancel">Đã bị hủy</option>
             </select>
           </div>
         </div>
