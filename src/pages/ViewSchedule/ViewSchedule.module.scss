@@ -71,6 +71,47 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  gap: 20px;
+}
+
+.weekNavigation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px 20px;
+  border-radius: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.weekButton {
+  background: transparent;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.weekButton:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.weekLabel {
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 15px;
+  min-width: 130px;
+  text-align: center;
 }
 
 .scheduleTitle {
@@ -82,6 +123,7 @@
 }
 
 .btnEdit {
+  margin-left: auto;
   background: #fbbf24;
   color: #1f2937;
   border: none;
@@ -181,6 +223,11 @@
 .yellow {
   background: #fde047;
   color: #713f12;
+}
+
+.purple {
+  background: #c4b5fd;
+  color: #4c1d95;
 }
 
 @media (max-width: 992px) {

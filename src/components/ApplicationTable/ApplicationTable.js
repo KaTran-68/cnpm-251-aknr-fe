@@ -2,36 +2,15 @@ import { FaEye, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import styles from "./ApplicationTable.module.scss";
 import { APP_STATUSES } from "../../constants/statuses";
 
-export default function ApplicationTable({ onView }) {
-  const data = [
-    {
-      id: 1,
-      mssv: "xxxxxxx",
-      name: "Nguyễn Văn A",
-      statusKey: APP_STATUSES.PENDING.key,
-      status: APP_STATUSES.PENDING.label,
-      submitDate: "30/9/2025, 4:00 PM",
-      approveDate: "1/10/2025, 9:00 AM",
-    },
-    {
-      id: 2,
-      mssv: "xxxxxxx",
-      name: "Nguyễn Văn A",
-      statusKey: APP_STATUSES.APPROVED.key,
-      status: APP_STATUSES.APPROVED.label,
-      submitDate: "30/9/2025, 7:00 AM",
-      approveDate: "1/10/2025, 9:00 AM",
-    },
-    {
-      id: 3,
-      mssv: "xxxxxxx",
-      name: "Nguyễn Văn A",
-      statusKey: APP_STATUSES.REJECTED.key,
-      status: APP_STATUSES.REJECTED.label,
-      submitDate: "30/9/2025, 9:00 AM",
-      approveDate: "1/10/2025, 9:00 AM",
-    },
-  ];
+export default function ApplicationTable({ applications = [], onView }) {
+  // Map status from API to display format
+  const getStatusInfo = (status) => {
+    const statusLower = status?.toLowerCase();
+    if (statusLower === "pending") return { key: APP_STATUSES.PENDING.key, label: APP_STATUSES.PENDING.label };
+    if (statusLower === "approved") return { key: APP_STATUSES.APPROVED.key, label: APP_STATUSES.APPROVED.label };
+    if (statusLower === "rejected") return { key: APP_STATUSES.REJECTED.key, label: APP_STATUSES.REJECTED.label };
+    return { key: "pending", label: status };
+  };
 
   const renderStatus = (statusKey, label) => {
     return (
@@ -56,47 +35,55 @@ export default function ApplicationTable({ onView }) {
         </thead>
 
         <tbody>
-          {data.map((row) => (
-            <tr key={row.id}>
-              <td>{row.mssv}</td>
-              <td>{row.name}</td>
-              <td>{renderStatus(row.statusKey, row.status)}</td>
-              <td>{row.submitDate}</td>
-              <td>{row.approveDate}</td>
+          {applications.length > 0 ? (
+            applications.map((row, index) => {
+              const statusInfo = getStatusInfo(row.status);
+              return (
+                <tr key={index}>
+                  <td>{row.id}</td>
+                  <td>{row.name}</td>
+                  <td>{renderStatus(statusInfo.key, statusInfo.label)}</td>
+                  <td>{row.daySubmit}</td>
+                  <td>{row.dayRespond || 'Chưa duyệt'}</td>
 
-              <td className={styles.actionCol}>
-                <button
-                  className={`${styles.actionBtn} ${styles.view}`}
-                  onClick={() => onView(row)}
-                >
-                  <FaEye /> Xem
-                </button>
+                  <td className={styles.actionCol}>
+                    <button
+                      className={`${styles.actionBtn} ${styles.view}`}
+                      onClick={() => onView(row)}
+                    >
+                      <FaEye /> Xem
+                    </button>
 
-                {row.statusKey === APP_STATUSES.PENDING.key && (
-                  <>
-                    <button className={`${styles.actionBtn} ${styles.approve}`}>
-                      <FaCheckCircle /> Duyệt
-                    </button>
-                    <button className={`${styles.actionBtn} ${styles.reject}`}>
-                      <FaTimesCircle /> Từ chối
-                    </button>
-                  </>
-                )}
+                    {statusInfo.key === APP_STATUSES.PENDING.key && (
+                      <>
+                        <button className={`${styles.actionBtn} ${styles.approve}`}>
+                          <FaCheckCircle /> Duyệt
+                        </button>
+                        <button className={`${styles.actionBtn} ${styles.reject}`}>
+                          <FaTimesCircle /> Từ chối
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan="6" style={{ textAlign: 'center', padding: '20px' }}>
+                Không có đơn đăng ký
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
-          <div className={styles.pagination}>
-      <button className={styles.pageBtn}>‹ Previous</button>
-
-      <button className={`${styles.pageNumber} ${styles.active}`}>1</button>
-      <button className={styles.pageNumber}>2</button>
-
-      <button className={styles.pageBtn}>Next ›</button>
-    </div>
-
+      <div className={styles.pagination}>
+        <button className={styles.pageBtn}>‹ Previous</button>
+        <button className={`${styles.pageNumber} ${styles.active}`}>1</button>
+        <button className={styles.pageNumber}>2</button>
+        <button className={styles.pageBtn}>Next ›</button>
+      </div>
     </div>
   );
 }

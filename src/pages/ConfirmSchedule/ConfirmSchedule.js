@@ -1,51 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import TopBar from "../../components/layout/TopBar/TopBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 import styles from "./ConfirmSchedule.module.scss";
-
-const sampleData = [
-  {
-    id: 1,
-    student: "Nguyễn Văn A",
-    subject: "Giải tích 1",
-    date: "3/10/2025",
-    time: "8:00 - 10:00",
-    location: "Khu tự học KMS H6",
-  },
-  {
-    id: 2,
-    student: "Nguyễn Văn A",
-    subject: "Vật lý 1",
-    date: "4/10/2025",
-    time: "14:00 - 16:00",
-    location: "Khu tự học tầng 3 H3",
-  },
-  {
-    id: 3,
-    student: "Nguyễn Văn B",
-    subject: "Giải tích 1",
-    date: "3/10/2025",
-    time: "8:00 - 10:00",
-    location: "Thư viện H1",
-  },
-  {
-    id: 4,
-    student: "Nguyễn Văn B",
-    subject: "Đại số",
-    date: "3/10/2025",
-    time: "18:00 - 20:00",
-    location: "Thư viện H1",
-  },
-];
+import { getClassData } from "../../services/api";
 
 const ConfirmSchedule = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [classData, setClassData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredData = sampleData.filter((item) =>
-    item.student.toLowerCase().includes(searchTerm.toLowerCase())
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await getClassData();
+        if (response.success) {
+          console.log(response.data);
+          // Filter only "Pending" status
+          const pendingClasses = response.data.filter(
+            item => item.status === "Pending" || item.status === "pending"
+          );
+          setClassData(pendingClasses);
+        } else {
+          console.log("error fetching data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch class data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
+  const filteredData = classData.filter((item) =>
+    item.student?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -57,12 +50,11 @@ const ConfirmSchedule = () => {
           <button className={styles.btnBack} onClick={() => navigate(-1)}>
             ← Quay lại
           </button>
-          <h1 className={styles.title}>HCMUT_TSS</h1>
-          <div className={styles.subtitle}>Tutor Support System</div>
+          <h1 className={styles.title}>XÁC NHẬN LỊCH DẠY</h1>
         </div>
 
         <div className={styles.heroSection}>
-          <h2 className={styles.pageTitle}>XÁC NHẬN LỊCH DẠY</h2>
+
 
           <div className={styles.searchBox}>
             <input
@@ -75,34 +67,48 @@ const ConfirmSchedule = () => {
           </div>
 
           <div className={styles.tableCard}>
-            <div className={styles.tableWrap}>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>Sinh viên</th>
-                    <th>Môn học</th>
-                    <th>Ngày học</th>
-                    <th>Giờ học</th>
-                    <th>Địa điểm / địa chỉ truy cập</th>
-                    <th>Xác nhận</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredData.map((row) => (
-                    <tr key={row.id}>
-                      <td>{row.student}</td>
-                      <td>{row.subject}</td>
-                      <td>{row.date}</td>
-                      <td>{row.time}</td>
-                      <td>{row.location}</td>
-                      <td>
-                        <button className={styles.btnConfirm}>Xác nhận</button>
-                      </td>
+            {loading ? (
+              <div style={{ padding: '40px', textAlign: 'center' }}>
+                Đang tải dữ liệu...
+              </div>
+            ) : (
+              <div className={styles.tableWrap}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>Sinh viên</th>
+                      <th>Môn học</th>
+                      <th>Ngày học</th>
+                      <th>Giờ học</th>
+                      <th>Địa điểm / địa chỉ truy cập</th>
+                      <th>Xác nhận</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {filteredData.length > 0 ? (
+                      filteredData.map((row, index) => (
+                        <tr key={index}>
+                          <td>{row.student}</td>
+                          <td>{row.subject}</td>
+                          <td>{row.date}</td>
+                          <td>{row.time}</td>
+                          <td>{row.location}</td>
+                          <td>
+                            <button className={styles.btnConfirm}>Xác nhận</button>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" style={{ textAlign: 'center' }}>
+                          Không có lịch dạy cần xác nhận
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>

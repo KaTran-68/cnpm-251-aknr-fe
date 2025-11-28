@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./TutorList.module.scss";
 import Header from '../../components/Header/Header';
+import { getApplicationData } from "../../services/api";
 
 import {
   FaFilter,
@@ -18,23 +19,61 @@ import ViewApplicationDialog from "../../components/ViewApplicationDialog/ViewAp
 export default function TutorList() {
   const [showFilter, setShowFilter] = useState(false);
   const [viewData, setViewData] = useState(null);
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await getApplicationData();
+        if (response.success) {
+          console.log(response.data);
+          setApplications(response.data);
+        } else {
+          console.log("error fetching application data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch application data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
+
+  // Calculate statistics
+  const stats = {
+    total: applications.length,
+    pending: applications.filter(app => app.status === "Pending" || app.status === "pending").length,
+    approved: applications.filter(app => app.status === "Approved" || app.status === "approved").length,
+    rejected: applications.filter(app => app.status === "Rejected" || app.status === "rejected").length,
+  };
+
+  // Filter applications by search term
+  const filteredApplications = applications.filter(app =>
+    app.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    app.mssv?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div className={styles.container}>
-      
+    <>
       <Header />
-    {/* BLUE TOP AREA */}
-      <div className={styles.topArea}>
-        <h2 className={styles.pageTitle}>Quản lý Tutor</h2>
+      <div className={styles.container}>
+        {/* BLUE TOP AREA */}
+        <div className={styles.topArea}>
+          <h2 className={styles.pageTitle}>Quản lý Tutor</h2>
 
-      {/* ---------------- STATISTIC CARDS ---------------- */}
-      <div className={styles.statsRow}>
-        {[
-          { title: "Tổng đơn", num: 10, icon: <FaClipboardList />, color: "Blue" },
-          { title: "Chờ duyệt", num: 2, icon: <FaClock />, color: "Yellow" },
-          { title: "Đã duyệt", num: 7, icon: <FaCheckCircle />, color: "Green" },
-          { title: "Từ chối", num: 1, icon: <FaTimesCircle />, color: "Red" },
-        ].map((item, idx) => (
+          {/* ---------------- STATISTIC CARDS ---------------- */}
+          <div className={styles.statsRow}>
+            {[
+              { title: "Tổng đơn", num: stats.total, icon: <FaClipboardList />, color: "Blue" },
+              { title: "Chờ duyệt", num: stats.pending, icon: <FaClock />, color: "Yellow" },
+              { title: "Đã duyệt", num: stats.approved, icon: <FaCheckCircle />, color: "Green" },
+              { title: "Từ chối", num: stats.rejected, icon: <FaTimesCircle />, color: "Red" },
+            ].map((item, idx) => (
           <div className={styles.statCard} key={idx}>
             <div className={styles.statInfo}>
               <p className={styles.statTitle}>{item.title}</p>
@@ -43,48 +82,59 @@ export default function TutorList() {
             <div className={`${styles.iconWrapper} ${styles[`icon${item.color}`]}`}>
               <span className={styles.iconMain}>{item.icon}</span>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* ---------------- SEARCH + TABLE WRAPPER ---------------- */}
-      <div className={styles.whiteBox}>
-
-        {/* Search Row */}
-        <div className={styles.searchRow}>
-          <div className={styles.searchBox}>
-            <FaSearch className={styles.searchIcon} />
-            <input
-              type="text"
-              className={styles.searchInput}
-              placeholder="Tìm kiếm theo tên hoặc MSSV..."
-            />
-          </div>
-
-          <button
-            className={styles.filterBtn}
-            onClick={() => setShowFilter(true)}
-          >
-            <FaFilter className={styles.filterIcon} />
-            Bộ lọc nâng cao
-          </button>
+            </div>
+          ))}
         </div>
 
-        {/* ---------------- TABLE ---------------- */}
-        <ApplicationTable onView={(row) => setViewData(row)} />
+        {/* ---------------- SEARCH + TABLE WRAPPER ---------------- */}
+        <div className={styles.whiteBox}>
+          {/* Search Row */}
+          <div className={styles.searchRow}>
+            <div className={styles.searchBox}>
+              <FaSearch className={styles.searchIcon} />
+              <input
+                type="text"
+                className={styles.searchInput}
+                placeholder="Tìm kiếm theo tên hoặc MSSV..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
 
-        {/* Filter Sidebar */}
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+            <button
+              className={styles.filterBtn}
+              onClick={() => setShowFilter(true)}
+            >
+              <FaFilter className={styles.filterIcon} />
+              Bộ lọc nâng cao
+            </button>
+          </div>
 
-        {/* View Detail Popup */}
-        {viewData && (
-          <ViewApplicationDialog
-            data={viewData}
-            onClose={() => setViewData(null)}
-          />
-        )}
+          {/* ---------------- TABLE ---------------- */}
+          {loading ? (
+            <div style={{ padding: '40px', textAlign: 'center' }}>
+              Đang tải dữ liệu đơn đăng ký...
+            </div>
+          ) : (
+            <ApplicationTable 
+              applications={filteredApplications}
+              onView={(row) => setViewData(row)} 
+            />
+          )}
+
+          {/* Filter Sidebar */}
+          {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+
+          {/* View Detail Popup */}
+          {viewData && (
+            <ViewApplicationDialog
+              data={viewData}
+              onClose={() => setViewData(null)}
+            />
+          )}
+        </div>
       </div>
     </div>
-    </div>
+    </>
   );
 }

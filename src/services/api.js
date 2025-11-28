@@ -57,7 +57,7 @@ export const getTutorData = async () => {
 }
 
 export const getClassData = async () => {
-  try {
+  try{
     const response = await api.get("/api/class");
     return response.data;
   } catch (error) {
@@ -66,4 +66,23 @@ export const getClassData = async () => {
   }
 }
 
+export const getStudentData = async () => {
+  try{
+    const response = await api.get("/api/students");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching student data:", error);
+    throw error;
+  }
+}
+
+export const getApplicationData = async () => {
+  try{
+    const response = await api.get("/api/applications");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching application data:", error);
+    throw error;
+  }
+}
 export default api;

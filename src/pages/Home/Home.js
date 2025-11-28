@@ -27,10 +27,10 @@ function Home() {
     bodyContent = (
       <>
         <div style={{ display: 'flex', gap: '3vw', marginBottom: '2rem' }}>
-          <button className={styles.tutorBtn}>Danh sách Sinh viên</button>
-          <button className={styles.tutorBtn}>Đăng ký lịch dạy</button>
+          <button className={styles.tutorBtn} onClick={() => navigate('/tutor/students')}>Danh sách Sinh viên</button>
+          <button className={styles.tutorBtn} onClick={() => navigate(`/${role}/register`)}>Đăng ký lịch dạy</button>
         </div>
-        <button className={styles.tutorBtn} style={{marginTop: '2rem'}}>Xem lịch dạy</button>
+        <button className={styles.tutorBtn} style={{marginTop: '2rem'}} onClick={() => navigate('/tutor/view')}>Xem lịch dạy</button>
       </>
     );
   } else if (role === 'admin') {

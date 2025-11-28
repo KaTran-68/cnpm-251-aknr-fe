@@ -205,6 +205,161 @@
   background: #2f855a;
 }
 
+// Schedule Board Styles
+.scheduleBoard {
+  background: linear-gradient(135deg, #4a9fd8 0%, #3282c4 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.scheduleBoardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.scheduleBoardTitle {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.weekNavigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.weekNavBtn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.weekNavBtn:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.weekRange {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 200px;
+  text-align: center;
+}
+
+.btnConfirm {
+  background: #fbbf24;
+  color: #1f2937;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s;
+}
+
+.btnConfirm:hover {
+  background: #f59e0b;
+}
+
+.calendarGrid {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.calendarHeader {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.timeColumn {
+  padding: 12px 8px;
+  font-weight: 600;
+  text-align: center;
+  border-right: 1px solid #e5e7eb;
+}
+
+.dayHeader {
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.dayHeader:last-child {
+  border-right: none;
+}
+
+.calendarBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeRow {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
+  border-bottom: 1px solid #e5e7eb;
+  min-height: 60px;
+}
+
+.timeCell {
+  padding: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a9fd8;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scheduleCell {
+  padding: 4px;
+  border-right: 1px solid #e5e7eb;
+  position: relative;
+}
+
+.scheduleCell:last-child {
+  border-right: none;
+}
+
+.classBlock {
+  background: #fbbf24;
+  color: #1f2937;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 992px) {
   .container {
     grid-template-columns: 1fr;
