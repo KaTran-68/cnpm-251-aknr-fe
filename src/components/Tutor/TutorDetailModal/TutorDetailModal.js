@@ -51,7 +51,7 @@ export default function TutorDetailModal({
           ✕
         </button>
 
-        <h2 className={styles.title}>THÔNG TIN CHI TIẾT Tutor</h2>
+        <h2 className={styles.title}>THÔNG TIN CHI TIẾT TUTOR</h2>
 
         <div className={styles.separator} />
 
@@ -66,18 +66,18 @@ export default function TutorDetailModal({
             />
           </div>
 
-          <div className={styles.right}>
+          <div className={styles.right} style={{ textAlign: "left" }}>
             <p>
               <strong>Họ và tên:</strong> {tutor.name || "-"}
             </p>
             <p>
-              <strong>Giới tính:</strong> {tutor.gender || "-"}
+              <strong>Giới tính:</strong> {tutor.sex || "-"}
             </p>
             <p>
               <strong>MSCB/MSSV:</strong> {tutor.id || "-"}
             </p>
             <p>
-              <strong>Trình độ:</strong> {tutor.level || "-"}
+              <strong>Trình độ:</strong> {tutor.level || "Sinh viên"}
             </p>
             <p>
               <strong>Khoa:</strong> {tutor.faculty || "-"}
@@ -92,7 +92,7 @@ export default function TutorDetailModal({
               <strong>Điểm TBTL:</strong> {tutor.gpa || "-"}
             </p>
             <p>
-              <strong>Mô tả:</strong> {tutor.bio || "-"}
+              <strong>Mô tả:</strong> {tutor.description || "-"}
             </p>
           </div>
         </div>

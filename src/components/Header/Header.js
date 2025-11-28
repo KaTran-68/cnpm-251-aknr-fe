@@ -3,11 +3,16 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { IoPersonCircleOutline, IoChevronDown } from "react-icons/io5";
 import logoTSS from "../../assets/images/logoTSS.png";
+import { useParams } from "react-router-dom";
+
+
 
 const Header = ({ onAvatarClick }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+  const { role } = useParams();
+  const actualRole = localStorage.getItem('role');
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -26,7 +31,7 @@ const Header = ({ onAvatarClick }) => {
 
   const handleAccountInfo = () => {
     setIsDropdownOpen(false);
-    navigate("/tutor/account");
+    navigate(`/${role}/account`);
     if (onAvatarClick) {
       onAvatarClick();
     }

@@ -42,5 +42,13 @@ export const AuthLogin = async (username, password, role) => {
     throw error;
   }
 }
-
+export const getTutorData = async () => {
+  try{
+    const response = await api.get("/api/tutor");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching tutor data:", error);
+    throw error;
+  }
+}
 export default api;
