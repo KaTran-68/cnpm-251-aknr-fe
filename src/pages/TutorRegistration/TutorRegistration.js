@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './TutorRegistration.module.scss';
+import Header from '../../components/Header/Header';
 
 export default function TutorRegistration() {
   return (
     <div className={styles.pageContainer}>
-      <div className={styles.card}>
+      <Header />
+      <div className={styles.content}>
+        <div className={styles.card}>
         <h2 className={styles.title}>Hoàn tất đơn đăng ký</h2>
 
         <form>
@@ -62,6 +65,7 @@ export default function TutorRegistration() {
             <button type="button" className={styles.submitBtn}>Tiếp tục</button>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

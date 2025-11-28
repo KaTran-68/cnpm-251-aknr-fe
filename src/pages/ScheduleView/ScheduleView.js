@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./ScheduleView.module.scss";
 import StatsCard from "../../components/StatsCard/StatsCard";
 import ScheduleClassCard from "../../components/Schedule_ClassCard/Schedule_ClassCard";
+import Header from "../../components/Header/Header";
 
 /**
  * ScheduleView - updated: khi nhấn nút 'Đăng ký lịch học' sẽ navigate tới /register-schedule
@@ -70,26 +71,12 @@ export default function ScheduleView() {
 
   return (
     <div className={styles.page}>
+      <Header />
       <div className={styles.frameBg}>
         <div className={styles.topBar}>
-          <div className={styles.leftLogos}>
-            <img
-              src="/assets/images/logo-left.png"
-              alt="logo"
-              className={styles.smallLogo}
-            />
-          </div>
 
           <div className={styles.titleWrap}>
             <div className={styles.pageTitle}>KHÔNG GIAN HỌC</div>
-          </div>
-
-          <div className={styles.rightLogos}>
-            <img
-              src="/assets/images/logo-right.png"
-              alt="logo"
-              className={styles.smallLogo}
-            />
           </div>
         </div>
 
@@ -136,7 +123,7 @@ export default function ScheduleView() {
           {/* navigate to register page */}
           <button
             className={styles.registerBtn}
-            onClick={() => navigate("/register-schedule")}
+            onClick={() => navigate("/register-schedule-sv")}
           >
             Đăng ký lịch học
           </button>

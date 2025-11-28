@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import RegisterSchedule from "../pages/RegisterSchedule/RegisterSchedule";
 import ViewSchedule from "../pages/ViewSchedule/ViewSchedule";
@@ -17,6 +17,8 @@ import QuizCreate from "../pages/Tutor/QuizCreate/QuizCreate";
 import TutorRegistration from "../pages/TutorRegistration/TutorRegistration";
 import SubmittedProfiles from "../pages/SubmittedProfiles/SubmittedProfiles";
 import TutorSelection from "../pages/TutorSelection/TutorSelection";
+import ScheduleView from "../pages/ScheduleView/ScheduleView";
+import RegisterScheduleSV from "../pages/RegisterSchedule_SV/RegisterSchedule_SV";
 
 const AppRoutes = () => {
   return (
@@ -27,7 +29,7 @@ const AppRoutes = () => {
         <Route path=":role/home" element={<Home />} />
         <Route path=":role/account" element={<AccountDashboard />} />
         <Route path=":role/change-password" element={<ChangePassword />} />
-        <Route path="/register" element={<RegisterSchedule />} />
+        <Route path=":role/register" element={<RegisterSchedule />} />
         <Route path="/view" element={<ViewSchedule />} />
         <Route path="/confirm" element={<ConfirmSchedule />} />
         <Route path="/students" element={<StudentList />} />
@@ -36,14 +38,13 @@ const AppRoutes = () => {
         <Route path="/class/quiz/:quizId" element={<QuizTake />} />
         <Route path="/class/tutor" element={<ClassManager />} />
         <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
-        <Route path="/TutorRegistration" element={<TutorRegistration />} />
-        <Route path="/SubmittedProfiles" element={<SubmittedProfiles />} />
+        <Route path="/tutor-registration" element={<TutorRegistration />} />
+        <Route path="/submitted-profiles" element={<SubmittedProfiles />} />
         <Route path="/tutor-selection" element={<TutorSelection />} />
-        {/* <Route path="/" element={<Navigate to="/spaces" replace />} />
         <Route path="/spaces" element={<ScheduleView />} />
-        <Route path="/register-schedule" element={<RegisterSchedule />} />
+        <Route path="/register-schedule-sv" element={<RegisterScheduleSV />} />
         
-        <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
+        {/* <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
       </Routes>
     </Router>
   );

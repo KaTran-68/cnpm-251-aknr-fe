@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import styles from './QuizCreate.module.scss';
 import { FaPlus } from 'react-icons/fa';
+import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const QuizCreate = () => {
   const [currentQuestion, setCurrentQuestion] = useState(2); // Index 2 = Câu 3
 
   return (
     <div className={styles.wrapper}>
+      <Header/>
       <div className={styles.contentFrame}>
         
         {/* Left Sidebar */}
@@ -82,6 +85,7 @@ const QuizCreate = () => {
         </div>
 
       </div>
+      <Footer/>
     </div>
   );
 };
