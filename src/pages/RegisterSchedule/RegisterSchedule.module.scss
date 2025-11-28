@@ -86,7 +86,7 @@
   border: 1px solid #dfe6ed;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .tableTitle {
@@ -97,8 +97,8 @@
   text-align: center;
 }
 
-.tableWrap { 
-  overflow-x: auto; 
+.tableWrap {
+  overflow-x: auto;
 }
 
 .table {
@@ -142,7 +142,7 @@
   border: 1px solid #dfe6ed;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .formLabel {
@@ -207,21 +207,21 @@
 }
 
 @media (max-width: 992px) {
-  .container { 
+  .container {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     padding: 16px;
   }
-  
+
   .headerSection,
   .tableSection,
   .formArea {
     grid-column: 1;
     max-width: 100%;
   }
-  
+
   .formRow,
-  .formRow:last-child { 
+  .formRow:last-child {
     grid-template-columns: 1fr;
   }
 }
