@@ -25,7 +25,6 @@ function LoginForm() {
     console.log("Password:", password);
     console.log("Role in LoginForm:", role);
     const response = await AuthLogin(username, password, role);
-    // alert(auth);
     if (response.auth){
       if (role === 'admin') {
         navigate("/admin/home");
@@ -44,7 +43,7 @@ function LoginForm() {
       localStorage.setItem('auth', true);
     }
     else{
-      setError('Tên đăng nhập hoặc mật khẩu không đúng.');
+      setError(response.data);
     }
 }
   return (
