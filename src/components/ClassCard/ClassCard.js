@@ -1,14 +1,15 @@
 import { FaCalendarAlt, FaVideo } from "react-icons/fa";
 import styles from "./ClassCard.module.scss";
 
+
 export default function ClassCard({ data, onView }) {
   const { name, tutor, status, student, statusKey } = data;
 
   // map statusKey to module class
   const statusClass =
-    statusKey === "upcoming"
+    statusKey === "Upcoming"
       ? styles.statusUpcoming
-      : statusKey === "ongoing"
+      : statusKey === "Ongoing"
       ? styles.statusOngoing
       : styles.statusEnded;
 
