@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TutorRegistration.module.scss';
 import Header from '../../components/Header/Header';
+import { useState } from 'react';
 
 export default function TutorRegistration() {
   const [form, setForm] = useState({
