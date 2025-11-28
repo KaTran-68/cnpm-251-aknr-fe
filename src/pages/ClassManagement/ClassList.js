@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./ClassList.module.scss";
 import Header from '../../components/Header/Header';
 import {
@@ -11,21 +11,96 @@ import {
 import ClassCard from "../../components/ClassCard/ClassCard";
 import ClassDetails from "../../components/ClassDetails/ClassDetails";
 import { CLASS_STATUSES } from "../../constants/statuses";
+import { getClassData } from "../../services/api";
 
 export default function ClassList() {
   const [selectedClass, setSelectedClass] = useState(null);
+  const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTutor, setSelectedTutor] = useState('all');
+  const [selectedSubject, setSelectedSubject] = useState('all');
 
-//   const classes = [
-//   { name: "Giải tích 1", tutor: "Nguyễn Văn A", status: "upcoming", student: "Nguyễn Văn B" },
-//   { name: "Giải tích 1", tutor: "Nguyễn Văn A", status: "ongoing", student: "Nguyễn Văn B" },
-//   { name: "Giải tích 1", tutor: "Nguyễn Văn C", status: "ended", student: "Nguyễn Văn C" },
-// ];
-const classes = [
-  { name: "Giải tích 1", tutor: "Nguyễn Văn A", status: CLASS_STATUSES.UPCOMING.label, statusKey: CLASS_STATUSES.UPCOMING.key, student: "Nguyễn Văn B" },
-  { name: "Giải tích 1", tutor: "Nguyễn Văn A", status: CLASS_STATUSES.ONGOING.label, statusKey: CLASS_STATUSES.ONGOING.key, student: "Nguyễn Văn B" },
-  { name: "Giải tích 1", tutor: "Nguyễn Văn C", status: CLASS_STATUSES.ENDED.label, statusKey: CLASS_STATUSES.ENDED.key, student: "Nguyễn Văn C" },
-  { name: "Giải tích 1", tutor: "Nguyễn Văn D", status: CLASS_STATUSES.ENDED.label, statusKey: CLASS_STATUSES.ENDED.key, student: "Nguyễn Văn C" }
-];
+  // Fetch class data from API
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        setLoading(true);
+        const response = await getClassData();
+        
+        // Handle different response structures
+        const data = Array.isArray(response) ? response : 
+                     (response?.data && Array.isArray(response.data)) ? response.data : 
+                     [];
+        
+        // Map API data to component format
+        const formattedClasses = data.map(cls => {
+          // Map API status to frontend status
+          let statusKey = CLASS_STATUSES.ONGOING.key;
+          let statusLabel = CLASS_STATUSES.ONGOING.label;
+          
+          const apiStatus = cls.status?.toLowerCase();
+          if (apiStatus === 'pending') {
+            statusKey = CLASS_STATUSES.UPCOMING.key;
+            statusLabel = CLASS_STATUSES.UPCOMING.label;
+          } else if (apiStatus === 'done' || apiStatus === 'cancel') {
+            statusKey = CLASS_STATUSES.ENDED.key;
+            statusLabel = CLASS_STATUSES.ENDED.label;
+          } else if (apiStatus === 'ongoing') {
+            statusKey = CLASS_STATUSES.ONGOING.key;
+            statusLabel = CLASS_STATUSES.ONGOING.label;
+          }
+          
+          return {
+            name: cls.subject,
+            tutor: cls.tutor,
+            tutorId: cls.tutorId,
+            student: cls.student,
+            studentMssv: cls.studentMssv,
+            date: cls.date,
+            time: cls.time,
+            location: cls.location,
+            description: cls.descriptionClass,
+            status: statusLabel,
+            statusKey: statusKey,
+            originalStatus: cls.status
+          };
+        });
+        
+        setClasses(formattedClasses);
+      } catch (error) {
+        console.error('Error fetching class data:', error);
+        setClasses([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchClasses();
+  }, []);
+
+  // Get unique tutors and subjects for filters
+  const uniqueTutors = [...new Set(classes.map(cls => cls.tutor))].filter(Boolean);
+  const uniqueSubjects = [...new Set(classes.map(cls => cls.name))].filter(Boolean);
+
+  // Filter classes based on search and filters
+  const filteredClasses = classes.filter(cls => {
+    const matchesSearch = cls.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         cls.tutor?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         cls.student?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTutor = selectedTutor === 'all' || cls.tutor === selectedTutor;
+    const matchesSubject = selectedSubject === 'all' || cls.name === selectedSubject;
+    
+    return matchesSearch && matchesTutor && matchesSubject;
+  });
+
+  // Calculate statistics
+  const stats = {
+    total: classes.length,
+    upcoming: classes.filter(cls => cls.statusKey === CLASS_STATUSES.UPCOMING.key).length,
+    ongoing: classes.filter(cls => cls.statusKey === CLASS_STATUSES.ONGOING.key).length,
+    ended: classes.filter(cls => cls.statusKey === CLASS_STATUSES.ENDED.key).length
+  };
 
 
 
@@ -40,10 +115,10 @@ const classes = [
         {/* ----- STATISTIC CARDS (Unified Format) ----- */}
         <div className={styles.statsRow}>
           {[
-            { title: "Tổng số lớp", num: 4, icon: <FaBookOpen />, color: "Blue" },
-            { title: "Sắp diễn ra", num: 1, icon: <FaRegClock />, color: "Purple" },
-            { title: "Đang diễn ra", num: 2, icon: <FaUsers />, color: "Green" },
-            { title: "Đã kết thúc", num: 1, icon: <FaCheckCircle />, color: "Red" },
+            { title: "Tổng số lớp", num: stats.total, icon: <FaBookOpen />, color: "Blue" },
+            { title: "Sắp diễn ra", num: stats.upcoming, icon: <FaRegClock />, color: "Purple" },
+            { title: "Đang diễn ra", num: stats.ongoing, icon: <FaUsers />, color: "Green" },
+            { title: "Đã kết thúc", num: stats.ended, icon: <FaCheckCircle />, color: "Red" },
           ].map((item, idx) => (
             <div className={styles.statCard} key={idx}>
               <div className={styles.statInfo}>
@@ -64,14 +139,33 @@ const classes = [
         <div className={styles.whiteBox}>
           {/* Filters */}
           <div className={styles.filterRow}>
-            <input className={styles.input} placeholder="Tìm kiếm lớp học..." />
+            <input 
+              className={styles.input} 
+              placeholder="Tìm kiếm lớp học..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
-            <select className={styles.select}>
-              <option>Tất cả tutor</option>
+            <select 
+              className={styles.select}
+              value={selectedTutor}
+              onChange={(e) => setSelectedTutor(e.target.value)}
+            >
+              <option value="all">Tất cả tutor</option>
+              {uniqueTutors.map((tutor, idx) => (
+                <option key={idx} value={tutor}>{tutor}</option>
+              ))}
             </select>
 
-            <select className={styles.select}>
-              <option>Tất cả môn học</option>
+            <select 
+              className={styles.select}
+              value={selectedSubject}
+              onChange={(e) => setSelectedSubject(e.target.value)}
+            >
+              <option value="all">Tất cả môn học</option>
+              {uniqueSubjects.map((subject, idx) => (
+                <option key={idx} value={subject}>{subject}</option>
+              ))}
             </select>
 
             <button className={styles.searchBtn}>Tìm kiếm</button>
@@ -79,13 +173,23 @@ const classes = [
 
         {/* Class Cards */}
         <div className={styles.cardGrid}>
-          {classes.map((cls, index) => (
-            <ClassCard
-              key={index}
-              data={cls}
-              onView={() => setSelectedClass(cls)}
+          {loading ? (
+            <div style={{ padding: '40px', textAlign: 'center', gridColumn: '1 / -1' }}>
+              Đang tải dữ liệu lớp học...
+            </div>
+          ) : filteredClasses.length > 0 ? (
+            filteredClasses.map((cls, index) => (
+              <ClassCard
+                key={index}
+                data={cls}
+                onView={() => setSelectedClass(cls)}
               />
-          ))}
+            ))
+          ) : (
+            <div style={{ padding: '40px', textAlign: 'center', gridColumn: '1 / -1' }}>
+              Không tìm thấy lớp học nào
+            </div>
+          )}
         </div>
       </div>
 

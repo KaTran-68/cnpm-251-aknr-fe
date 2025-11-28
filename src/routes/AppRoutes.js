@@ -32,9 +32,9 @@ const AppRoutes = () => {
         <Route path=":role/account" element={<AccountDashboard />} />
         <Route path=":role/change-password" element={<ChangePassword />} />
         <Route path=":role/register" element={<RegisterSchedule />} />
-        <Route path="/view" element={<ViewSchedule />} />
-        <Route path="/confirm" element={<ConfirmSchedule />} />
-        <Route path="/students" element={<StudentList />} />
+        <Route path="tutor/view" element={<ViewSchedule />} />
+        <Route path="tutor/confirm" element={<ConfirmSchedule />} />
+        <Route path="tutor/students" element={<StudentList />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/class" element={<ClassDashboard/>} />
         <Route path="/class/quiz/:quizId" element={<QuizTake />} />

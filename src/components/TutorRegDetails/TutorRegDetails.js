@@ -4,6 +4,9 @@ import { FaUser, FaEnvelope, FaCalendarAlt } from 'react-icons/fa';
 import { APP_STATUSES } from '../../constants/statuses';
 
 export default function TutorRegDetails({ data, onClose }){
+  const statusKey = (data?.status || '').toLowerCase();
+  const statusInfo = Object.values(APP_STATUSES).find(s => s.key === statusKey);
+  
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
@@ -15,15 +18,15 @@ export default function TutorRegDetails({ data, onClose }){
           <div className={styles.infoGrid}>
             <div>
               <p className={styles.label}>Họ và tên</p>
-              <p>Nguyễn Văn A</p>
+              <p>{data?.name || 'N/A'}</p>
             </div>
             <div>
               <p className={styles.label}>MSSV/MSCB</p>
-              <p>2213452</p>
+              <p>{data?.id || 'N/A'}</p>
             </div>
             <div>
               <p className={styles.label}>Khoa</p>
-              <p>KH-KTMT</p>
+              <p>{data?.faculty || 'N/A'}</p>
             </div>
           </div>
         </div>
@@ -33,11 +36,11 @@ export default function TutorRegDetails({ data, onClose }){
           <div className={styles.infoGrid}>
             <div>
               <p className={styles.label}>Email</p>
-              <p>a.nguyents5@hcmut.edu.vn</p>
+              <p>{data?.email || 'N/A'}</p>
             </div>
             <div>
               <p className={styles.label}>SĐT</p>
-              <p>0123456789</p>
+              <p>{data?.phone || 'N/A'}</p>
             </div>
           </div>
         </div>
@@ -45,20 +48,20 @@ export default function TutorRegDetails({ data, onClose }){
         <div className={styles.section}>
           <div className={styles.row}><FaCalendarAlt /> <strong>Tiến trình xử lý hồ sơ</strong></div>
           <div className={styles.rowBetween}>
-            <div>Ngày nộp<br/><strong>20/10/20250 lúc 10:00 AM</strong></div>
-            {
-              (() => {
-                const statusKey = (data?.statusKey || (data?.status || '')?.toLowerCase() || '').toLowerCase();
-                const statusLabel = Object.values(APP_STATUSES).find(s => s.key === statusKey)?.label || data.status || statusKey;
-                return (
-                  <div className={`${styles.status} ${styles[statusKey]}`}>{statusLabel}</div>
-                );
-              })()
-            }
+            <div>Ngày nộp<br/><strong>{data?.daySubmit || 'N/A'}</strong></div>
+            <div className={`${styles.status} ${styles[statusKey]}`}>
+              {statusInfo?.label || data?.status || 'Chờ duyệt'}
+            </div>
           </div>
         </div>
 
-        <div className={styles.footerNote}>Bạn đã trở thành tutor, vui lòng truy cập trang đăng nhập dành cho tutor!</div>
+        <div className={styles.footerNote}>
+          {statusKey === 'approved' 
+            ? 'Bạn đã trở thành tutor, vui lòng truy cập trang đăng nhập dành cho tutor!' 
+            : statusKey === 'rejected'
+            ? 'Đơn đăng ký của bạn đã bị từ chối.'
+            : 'Đơn đăng ký của bạn đang được xem xét.'}
+        </div>
       </div>
     </div>
   )

@@ -1,64 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import TopBar from "../../components/layout/TopBar/TopBar";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 import StudentDetailModal from "../../components/Common/StudentDetailModal/StudentDetailModal";
 import styles from "./StudentList.module.scss";
-
-const registeredStudents = [
-  {
-    id: 1,
-    name: "Nguyễn Văn A",
-    gender: "Nam",
-    mssv: "2411111",
-    faculty: "Khoa học và Kỹ thuật Máy tính",
-    gpa: "2.5/4.0",
-    notes: "Đang tìm Tutor giải bộ thơi gian dài",
-  },
-  {
-    id: 2,
-    name: "Nguyễn Thị B",
-    gender: "Nữ",
-    mssv: "2550001",
-    faculty: "Quản lý Công nghiệp",
-    gpa: "2.3/4.0",
-    notes: "Ưu tiên học online",
-  },
-  {
-    id: 3,
-    name: "Phạm Quang C",
-    gender: "Nam",
-    mssv: "2313131",
-    faculty: "Tài nguyên và Môi trường",
-    gpa: "2.0/4.0",
-    notes: "",
-  },
-];
-
-const studyingStudents = [
-  {
-    id: 4,
-    name: "Nguyễn Thúy D",
-    gender: "Nữ",
-    mssv: "2413138",
-    faculty: "KH-KTMT",
-    gpa: "2.2/4.0",
-    email: "thuy.d@hcmut.edu.vn",
-    phone: "0000000000",
-    avatar: null,
-    major: "Khoa học Máy tính",
-    startDate: "19/02/2025",
-    completedSessions: 4,
-    subjects: "Vật lý 1, Cấu trúc rời rạc",
-  },
-];
+import { getStudentData } from "../../services/api";
 
 const StudentList = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [registeredStudents, setRegisteredStudents] = useState([]);
+  const [studyingStudents, setStudyingStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await getStudentData();
+        if (response.success) {
+          console.log(response.data);
+          // Since API doesn't have status field, separate by startDay presence
+          // Students with startDay are studying, others are registered
+          const studying = response.data.filter(
+            student => student.startDay && student.startDay !== ""
+          );
+          const registered = response.data.filter(
+            student => !student.startDay || student.startDay === ""
+          );
+          setRegisteredStudents(registered);
+          setStudyingStudents(studying);
+        } else {
+          console.log("error fetching student data");
+        }
+      } catch (error) {
+        console.error("Failed to fetch student data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchData();
+  }, []);
 
   const handleViewDetail = (student) => {
     setSelectedStudent(student);
@@ -71,12 +57,26 @@ const StudentList = () => {
   };
 
   const filteredRegistered = registeredStudents.filter((s) =>
-    s.name.toLowerCase().includes(searchTerm.toLowerCase())
+    s.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const filteredStudying = studyingStudents.filter((s) =>
-    s.name.toLowerCase().includes(searchTerm.toLowerCase())
+    s.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  if (loading) {
+    return (
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.container}>
+          <div style={{ padding: '40px', textAlign: 'center' }}>
+            Đang tải dữ liệu sinh viên...
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -126,22 +126,30 @@ const StudentList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredRegistered.map((student) => (
-                    <tr key={student.id}>
-                      <td>{student.name}</td>
-                      <td>{student.gender}</td>
-                      <td>{student.mssv}</td>
-                      <td>{student.faculty}</td>
-                      <td>{student.gpa}</td>
-                      <td>{student.notes}</td>
-                      <td>
-                        <button className={styles.btnAccept}>Xác nhận</button>
-                      </td>
-                      <td>
-                        <button className={styles.btnReject}>Từ chối</button>
+                  {filteredRegistered.length > 0 ? (
+                    filteredRegistered.map((student, index) => (
+                      <tr key={index}>
+                        <td>{student.name}</td>
+                        <td>{student.sex}</td>
+                        <td>{student.mssv}</td>
+                        <td>{student.faculty}</td>
+                        <td>{student.gpa}/4.0</td>
+                        <td>{student.major || ''}</td>
+                        <td>
+                          <button className={styles.btnAccept}>Xác nhận</button>
+                        </td>
+                        <td>
+                          <button className={styles.btnReject}>Từ chối</button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8" style={{ textAlign: 'center' }}>
+                        Không có sinh viên đăng ký
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
@@ -165,25 +173,33 @@ const StudentList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredStudying.map((student) => (
-                    <tr key={student.id}>
-                      <td>{student.name}</td>
-                      <td>{student.gender}</td>
-                      <td>{student.mssv}</td>
-                      <td>{student.faculty}</td>
-                      <td>{student.gpa}</td>
-                      <td>{student.email}</td>
-                      <td>{student.phone}</td>
-                      <td>
-                        <button
-                          className={styles.btnDetail}
-                          onClick={() => handleViewDetail(student)}
-                        >
-                          Thông tin chi tiết →
-                        </button>
+                  {filteredStudying.length > 0 ? (
+                    filteredStudying.map((student, index) => (
+                      <tr key={index}>
+                        <td>{student.name}</td>
+                        <td>{student.sex}</td>
+                        <td>{student.mssv}</td>
+                        <td>{student.faculty}</td>
+                        <td>{student.gpa}/4.0</td>
+                        <td>{student.email}</td>
+                        <td>{student.phone}</td>
+                        <td>
+                          <button
+                            className={styles.btnDetail}
+                            onClick={() => handleViewDetail(student)}
+                          >
+                            Thông tin chi tiết →
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8" style={{ textAlign: 'center' }}>
+                        Không có sinh viên đang theo học
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
