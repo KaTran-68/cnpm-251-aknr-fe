@@ -19,6 +19,8 @@ import SubmittedProfiles from "../pages/SubmittedProfiles/SubmittedProfiles";
 import TutorSelection from "../pages/TutorSelection/TutorSelection";
 import ScheduleView from "../pages/ScheduleView/ScheduleView";
 import RegisterScheduleSV from "../pages/RegisterSchedule_SV/RegisterSchedule_SV";
+import TutorList from "../pages/TutorManagement/TutorList";
+import ClassList from "../pages/ClassManagement/ClassList";
 
 const AppRoutes = () => {
   return (
@@ -43,6 +45,8 @@ const AppRoutes = () => {
         <Route path="/tutor-selection" element={<TutorSelection />} />
         <Route path="/spaces" element={<ScheduleView />} />
         <Route path="/register-schedule-sv" element={<RegisterScheduleSV />} />
+        <Route path="/tutor-list" element={<TutorList />} />
+        <Route path="/class-list" element={<ClassList />} />
         
         {/* <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
       </Routes>

@@ -36,8 +36,8 @@ function Home() {
   } else if (role === 'admin') {
     bodyContent = (
       <div style={{ display: 'flex', gap: '3vw', marginBottom: '2rem' }}>
-        <button className={styles.tutorBtn}>Quản lý Tutor</button>
-        <button className={styles.tutorBtn}>Quản lý lớp học</button>
+        <button className={styles.tutorBtn} onClick={() => navigate('/tutor-list')}>Quản lý Tutor</button>
+        <button className={styles.tutorBtn} onClick={() => navigate('/class-list')}>Quản lý lớp học</button>
       </div>
     );
   } else if (role === 'teacher') {

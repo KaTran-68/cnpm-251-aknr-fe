@@ -30,7 +30,7 @@ function AccountDashboard({}) {
     navigate(`/${role}/home`);
     };
   return (
-   <div className={styles.container}>
+    <div className={styles.container}>
       <Header />
       <div className={styles.content}>
         <h2 className={styles.title}>QUẢN LÝ TÀI KHOẢN</h2>
@@ -41,6 +41,10 @@ function AccountDashboard({}) {
               <button className={styles.actionBtn} onClick={onRegister}>Đăng ký làm Tutor</button>
             )}
             <button className={styles.actionBtn} onClick={onLogout}>Đăng xuất</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
