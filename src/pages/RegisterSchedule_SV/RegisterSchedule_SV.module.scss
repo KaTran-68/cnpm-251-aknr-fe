@@ -3,36 +3,21 @@
   font-family: "Roboto", sans-serif;
   background: #fff;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* header (kept simple here) */
 .header {
-  height: 116px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  background: #fff;
-  border-bottom: 4px solid #eee;
+  padding: 20px 28px;
+  background: #3e99c5;
 }
-.logo {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-}
+
 .header h1 {
   margin: 0;
   font-size: 28px;
   font-weight: 700;
   text-align: center;
-  flex: 1;
-}
-.account {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* frame blue bg */

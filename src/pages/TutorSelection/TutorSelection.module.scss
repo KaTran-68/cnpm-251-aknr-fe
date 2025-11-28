@@ -17,7 +17,7 @@
   background-image: url("/assets/images/bg.png");
   background-position: center;
   background-size: cover;
-  padding: 20px 40px 60px;
+  padding: auto 40px 60px;
   box-sizing: border-box;
   margin-top: -25px;
 }
@@ -26,7 +26,8 @@
 .searchBar {
   position: relative;
   max-width: 1200px;
-  margin: 12px auto 28px;
+  margin: 30px auto 30px;
+  padding-top: 20px;
 }
 
 /* input full-width, padding-right to make room for button inside */

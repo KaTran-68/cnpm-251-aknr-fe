@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header/Header";
 import TopBar from "../../components/layout/TopBar/TopBar";
 import Footer from "../../components/layout/Footer/Footer";
 import styles from "./RegisterSchedule.module.scss";
@@ -33,18 +34,18 @@ const RegisterSchedule = () => {
     // eslint-disable-next-line no-console
     console.log({ day, duration, shift, startTime, place });
   };
-
+  const role = localStorage.getItem('role') || 'tutor';
+  if (role !== 'tutor') {
+    navigate(`/${role}/home`);
+  };
   return (
     <div className={styles.wrapper}>
-      <TopBar />
-
+      <Header />
       <div className={styles.container}>
         <div className={styles.headerSection}>
           <button className={styles.btnBack} onClick={() => navigate(-1)}>
             ← Quay lại
           </button>
-          <h1 className={styles.title}>HCMUT_TSS</h1>
-          <div className={styles.subtitle}>Tutor Support System</div>
           <h2 className={styles.pageHeading}>ĐĂNG KÝ LỊCH DẠY</h2>
         </div>
 

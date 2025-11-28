@@ -5,9 +5,14 @@
 .page{
   min-height:100vh;
   background: var(--frame-blue);
-  padding: 18px;
+  display: flex;
+  flex-direction: column;
   box-sizing:border-box;
   font-family: inherit;
+}
+
+.topArea {
+  padding: 18px;
 }
 
 .headerArea{ text-align:center; padding: 8px 0 18px; color:#fff }

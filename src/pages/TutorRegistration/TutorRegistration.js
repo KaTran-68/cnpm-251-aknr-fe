@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "./TutorRegistration.module.scss";
+import React from 'react';
+import styles from './TutorRegistration.module.scss';
+import Header from '../../components/Header/Header';
 
 export default function TutorRegistration() {
   const [form, setForm] = useState({
@@ -36,8 +37,10 @@ export default function TutorRegistration() {
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.card}>
+    <div className={styles.pageContainer}>
+      <Header />
+      <div className={styles.content}>
+        <div className={styles.card}>
         <h2 className={styles.title}>Hoàn tất đơn đăng ký</h2>
 
         <form className={styles.form} onSubmit={handleSubmit} noValidate>
@@ -145,6 +148,7 @@ export default function TutorRegistration() {
             Tiếp tục
           </button>
         </form>
+        </div>
       </div>
     </div>
   );

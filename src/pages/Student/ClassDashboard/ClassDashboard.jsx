@@ -10,6 +10,8 @@ import MockDataProvider from '../../../services/mockData';
 import MockLoginModal from '../../../components/Common/MockLoginModal/MockLoginModal';
 import FeedbackModal from '../../../components/Student/FeedbackModal/FeedbackModal';
 import TranscriptModal from '../../../components/Student/TranscriptModal/TranscriptModal';
+import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const sections = [
   { title: 'Điểm danh', key: 'attendance' },
@@ -165,6 +167,7 @@ const ClassDashboard = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Header />
       <div className={styles.hero}>
         <div className={styles.contentFrame}>
           <div className={styles.card}>
@@ -289,6 +292,7 @@ const ClassDashboard = () => {
           sessionData={selectedSession}
         />
       </div>
+      <Footer />
     </div>
   );
 };

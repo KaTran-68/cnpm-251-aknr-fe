@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TopBar from "../../components/layout/TopBar/TopBar";
+// import TopBar from "../../components/layout/TopBar/TopBar";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 import styles from "./ConfirmSchedule.module.scss";
 
@@ -49,7 +50,7 @@ const ConfirmSchedule = () => {
 
   return (
     <div className={styles.wrapper}>
-      <TopBar />
+      <Header />
 
       <div className={styles.container}>
         <div className={styles.headerSection}>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styles from './QuizTake.module.scss';
 import { getQuizById, submitQuiz } from '../../../services/quizzes';
+import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const QuizTake = () => {
   const { quizId } = useParams();
@@ -71,6 +73,7 @@ const QuizTake = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Header />
       <div className={styles.contentFrame}>
         <div className={styles.leftCol}>
           <div className={styles.sideCard}>
@@ -146,6 +149,7 @@ const QuizTake = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

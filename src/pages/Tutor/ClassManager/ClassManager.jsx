@@ -4,6 +4,8 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import AttendanceListModal from '../../../components/Tutor/AttendanceListModal/AttendanceListModal';
 import MinutesCreateModal from '../../../components/Tutor/MinutesCreateModal/MinutesCreateModal';
+import Header from '../../../components/Header/Header';
+import Footer from '../../../components/Footer/Footer';
 
 const ClassManager = () => {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const ClassManager = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Header />
       <div className={styles.hero}>
         <div className={styles.contentFrame}>
           <div className={styles.card}>
@@ -141,6 +144,7 @@ const ClassManager = () => {
         show={showMinutesModal} 
         onClose={() => setShowMinutesModal(false)} 
       />
+      <Footer/>
     </div>
   );
 };

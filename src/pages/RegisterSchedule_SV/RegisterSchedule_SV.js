@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./RegisterSchedule_SV.module.scss";
 import { useNavigate } from "react-router-dom";
-
+import Header from "../../components/Header/Header";
 /**
  * RegisterSchedule page - demo implementation based on pasted2.txt visual.
  * This page is shown after clicking "Đăng ký lịch học".
@@ -38,7 +38,7 @@ const MOCK_SLOTS = [
   },
 ];
 
-export default function RegisterSchedule() {
+function RegisterSchedule_SV() {
   const [slots] = useState(MOCK_SLOTS);
   const [selected, setSelected] = useState({});
   const navigate = useNavigate();
@@ -57,8 +57,16 @@ export default function RegisterSchedule() {
     alert(`Đã đăng ký slot ${slotId} với môn: ${subject}`);
   }
 
+  // const role = localStorage.getItem('role') || 'student';
+  // if (role === 'student') {
+  //   navigate(`/${role}/home`);
+  // };
+
   return (
+
     <div className={styles.page}>
+      <Header />
+
       <div className={styles.header}>
         <h1>Đăng ký lịch học</h1>
       </div>
@@ -122,3 +130,7 @@ export default function RegisterSchedule() {
     </div>
   );
 }
+
+
+
+export default RegisterSchedule_SV

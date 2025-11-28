@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TopBar from "../../components/layout/TopBar/TopBar";
+// import TopBar from "../../components/layout/TopBar/TopBar";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/layout/Footer/Footer";
 import StudentDetailModal from "../../components/Common/StudentDetailModal/StudentDetailModal";
 import styles from "./StudentList.module.scss";
@@ -79,15 +80,15 @@ const StudentList = () => {
 
   return (
     <div className={styles.wrapper}>
-      <TopBar />
+      <Header />
 
       <div className={styles.container}>
-        <div className={styles.header}>
+        {/* <div className={styles.header}>
           <div className={styles.headerBox}>
             <h1 className={styles.title}>HCMUT_TSS</h1>
             <div className={styles.subtitle}>Tutor Support System</div>
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.contentArea}>
           <div className={styles.titleRow}>
