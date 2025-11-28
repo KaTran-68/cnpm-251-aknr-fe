@@ -50,8 +50,7 @@ const ViewSchedule = () => {
             <button 
               className={styles.btnEdit}
               onClick={() => navigate("/confirm")}
-            >
-              Xác nhận lịch dạy
+            >Xác nhận lịch dạy
             </button>
           </div>
 

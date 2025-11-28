@@ -3,10 +3,19 @@ import styles from './AccountDashboard.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 
-function AccountDashboard({onLogout,onRegister}) {
+
+
+function AccountDashboard({}) {
   const { role } = useParams();
   const navigate = useNavigate();
   const actualRole = localStorage.getItem('role');
+
+  function onLogout() {
+    navigate('/');
+  }
+  function onRegister() {
+    navigate('/TutorRegistration');
+  }
 
   useEffect(() => {
     if (role && actualRole && role !== actualRole) {
@@ -21,7 +30,7 @@ function AccountDashboard({onLogout,onRegister}) {
     navigate(`/${role}/home`);
     };
   return (
-    <div className={styles.container}>
+   <div className={styles.container}>
       <Header />
       <div className={styles.content}>
         <h2 className={styles.title}>QUẢN LÝ TÀI KHOẢN</h2>
@@ -31,11 +40,7 @@ function AccountDashboard({onLogout,onRegister}) {
             {!isSimple && (
               <button className={styles.actionBtn} onClick={onRegister}>Đăng ký làm Tutor</button>
             )}
-            <button className={styles.logoutBtn} onClick={onLogout}>Đăng xuất</button>
-          </div>
-        </div>
-      </div>
-    </div>
+            <button className={styles.actionBtn} onClick={onLogout}>Đăng xuất</button>
   );
 }
 

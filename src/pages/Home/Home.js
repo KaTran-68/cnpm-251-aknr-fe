@@ -40,8 +40,13 @@ function Home() {
         <button className={styles.tutorBtn}>Quản lý lớp học</button>
       </div>
     );
-  } else {
-    bodyContent = null;
+  } else if (role === 'teacher') {
+    bodyContent = (
+      <div style={{ display: 'flex', gap: '3vw', marginBottom: '2rem' }}>
+        <button className={styles.tutorBtn}>Đăng ký làm Tutor</button>
+        <button className={styles.tutorBtn}>Xem hồ sơ đã nộp</button>
+      </div>
+    );
   }
 
   return (
