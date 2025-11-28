@@ -37,6 +37,11 @@ const AppRoutes = () => {
         <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
         <Route path="/TutorRegistration" element={<TutorRegistration />} />
         <Route path="/SubmittedProfiles" element={<SubmittedProfiles />} />
+//         <Route path="/" element={<Navigate to="/spaces" replace />} />
+//         <Route path="/spaces" element={<ScheduleView />} />
+//         <Route path="/register-schedule" element={<RegisterSchedule />} />
+//         <Route path="/tutor-selection" element={<TutorSelection />} />
+//         <Route path="*" element={<Navigate to="/spaces" replace />} />
       </Routes>
     </Router>
   );

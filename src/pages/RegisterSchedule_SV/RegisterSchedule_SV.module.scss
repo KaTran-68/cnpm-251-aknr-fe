@@ -1,0 +1,177 @@
+/* Styles for RegisterSchedule - matches pasted2.txt layout */
+.page {
+  font-family: "Roboto", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* header (kept simple here) */
+.header {
+  height: 116px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: #fff;
+  border-bottom: 4px solid #eee;
+}
+.logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  flex: 1;
+}
+.account {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* frame blue bg */
+.frameBg {
+  margin: 18px;
+  background: #3e99c5;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* top stats small card */
+.statsCard {
+  width: 160px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.statsTitle {
+  color: #333;
+}
+.statsValue {
+  font-weight: 700;
+  font-size: 28px;
+  margin-top: 6px;
+}
+
+/* controls row */
+.controls {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0 18px;
+}
+.search {
+  flex: 1;
+  height: 40px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+.pill {
+  background: #eee;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* grid of cards */
+.grid {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+/* single card */
+.card {
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date {
+  font-weight: 600;
+}
+.meta {
+  margin-top: 10px;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sep {
+  height: 1px;
+  background: #eee;
+  margin: 12px 0;
+}
+.tutorLabel {
+  color: #999;
+  margin-top: 6px;
+}
+.tutorName {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.chooseLabel {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* input inside card */
+.input {
+  height: 36px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.registerBtn {
+  height: 36px;
+  border-radius: 18px;
+  border: 1px solid #777;
+  background: transparent;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+/* footer */
+.footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+.backBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
