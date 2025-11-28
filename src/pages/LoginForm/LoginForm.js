@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import backgroundImg from '../../assets/images/background.png';
 import TSSLogo from '../../assets/images/logoTSS.png';
 import BKLogo from '../../assets/images/logoBK.png';
+import {getUserProfile} from '../../services/api';
+import { AuthLogin } from '../../services/api';
 
 function LoginForm() {
   const location = useLocation();
@@ -16,32 +18,32 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      // Gửi request tới API /login
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, role })
-      });
-      const data = await res.json();
-      if (data.message === 'success') {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-        }
-        navigate(`/${role}/home`);
-      } else {
-        setError(data.message || 'Đăng nhập thất bại');
+    console.log("Username:", username);
+    console.log("Password:", password);
+    console.log("Role in LoginForm:", role);
+    const response = await AuthLogin(username, password, role);
+    // alert(auth);
+    if (response.auth){
+      if (role === 'admin') {
+        navigate("/admin/home");
       }
-    } catch (err) {
-      setError('Lỗi kết nối server');
+      else if (role === 'teacher') {
+        navigate("/teacher/home");
+      }
+      else if (role === 'tutor') {
+        navigate("/tutor/home");
+      }
+      else {
+        navigate("/student/home");
+      }
     }
-    setLoading(false);
-  };
+    else{
+      setError('Tên đăng nhập hoặc mật khẩu không đúng.');
+    }
+}
   return (
     <div className={styles.container}>
       {}

@@ -3,10 +3,19 @@ import styles from './AccountDashboard.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import TSSLogo from '../../assets/images/logoTSS.png';
 
-function AccountDashboard({onLogout,onRegister}) {
+
+
+function AccountDashboard({}) {
   const { role } = useParams();
   const navigate = useNavigate();
   const actualRole = localStorage.getItem('role');
+
+  function onLogout() {
+    navigate('/');
+  }
+  function onRegister() {
+    navigate('/TutorRegistration');
+  }
 
   useEffect(() => {
     if (role && actualRole && role !== actualRole) {
@@ -47,7 +56,7 @@ function AccountDashboard({onLogout,onRegister}) {
           {!isSimple && (
             <button className={styles.actionBtn} onClick={onRegister}>Đăng ký làm Tutor</button>
           )}
-          <button className={styles.logoutBtn} onClick={onLogout}>Đăng xuất</button>
+          <button className={styles.actionBtn} onClick={onLogout}>Đăng xuất</button>
         </div>
       </div>
     </div>
