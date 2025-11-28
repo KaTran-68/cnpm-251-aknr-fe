@@ -1,5 +1,4 @@
 .App {
-<<<<<<< HEAD
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,12 +10,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-main.App-body {
-  padding: clamp(12px, 2vw, 24px) 0;
-=======
-  text-align: center;
 }
 
 .App-logo {
@@ -52,5 +45,4 @@ main.App-body {
   to {
     transform: rotate(360deg);
   }
->>>>>>> ea8a994 (FE cua Ton)
 }
