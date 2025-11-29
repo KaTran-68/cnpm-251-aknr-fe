@@ -10,6 +10,7 @@ function AccountDashboard({}) {
   const actualRole = localStorage.getItem('role');
 
   function onLogout() {
+    localStorage.clear();
     navigate('/');
   }
   function onRegister() {
@@ -40,6 +41,7 @@ function AccountDashboard({}) {
               <button className={styles.actionBtn} onClick={onRegister}>Đăng ký làm Tutor</button>
             )}
             <button className={styles.actionBtn} onClick={onLogout}>Đăng xuất</button>
+
           </div>
         </div>
       </div>

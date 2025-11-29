@@ -11,7 +11,7 @@ function Home() {
   const { role } = useParams();
   const navigate = useNavigate();
   const actualRole = localStorage.getItem('role');
-
+  const registeredTutor = localStorage.getItem('RegisterTutor');
   useEffect(() => {
     if (role && actualRole && role !== actualRole) {
       navigate(`/${actualRole}/home`, { replace: true });
@@ -21,7 +21,9 @@ function Home() {
   let bodyContent;
   if (role === 'student') {
     bodyContent = (
-      <button className={styles.tutorBtn} onClick={() => navigate('/tutor-selection')}>Đăng ký chọn Tutor</button>
+      registeredTutor ? (
+        <button className={styles.tutorBtn} onClick={() => navigate('/spaces')}>Xem lớp học</button>
+      ) : <button className={styles.tutorBtn} onClick={() => navigate('/tutor-selection')}>Đăng ký chọn Tutor</button>
     );  
   } else if (role === 'tutor') {
     bodyContent = (

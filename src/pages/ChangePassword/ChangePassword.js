@@ -39,13 +39,13 @@ function ChangePassword({ onSubmit }) {
         <h2 className={styles.title}>THAY ĐỔI MẬT KHẨU</h2>
         <div className={styles.body}>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <label>Username</label>
+            <label className={styles.label}>Username</label>
             <input name="username" value={form.username} onChange={handleChange} className={styles.input} />
-            <label>Old Password</label>
+            <label className={styles.label}>Old Password</label>
             <input name="oldPassword" type="password" value={form.oldPassword} onChange={handleChange} className={styles.input} />
-            <label>New Password</label>
+            <label className={styles.label}>New Password</label>
             <input name="newPassword" type="password" value={form.newPassword} onChange={handleChange} className={styles.input} />
-            <label>Confirm</label>
+            <label className={styles.label}>Confirm</label>
             <input name="confirm" type="password" value={form.confirm} onChange={handleChange} className={styles.input} />
             {error && <div className={styles.error}>{error}</div>}
             <button className={styles.submitBtn} disabled={isDisabled}>Tiếp tục</button>

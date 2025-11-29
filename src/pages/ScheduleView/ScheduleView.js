@@ -43,6 +43,7 @@ export default function ScheduleView() {
   const [classes, setClasses] = useState([]);
   const [q, setQ] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  const RegisterTutor = localStorage.getItem('RegisterTutor');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,27 +60,20 @@ export default function ScheduleView() {
     fetchClasses();
   }, []);
 
-  const stats = {
-    total: classes.length,
-    upcoming: classes.filter((c) => c.status === "Upcoming").length,
-    cancel: classes.filter((c) => c.status === "Cancel").length,
-    finished: classes.filter((c) => c.status === "Done").length,
-    pending: classes.filter((c) => c.status === "Pending").length,
-  };
-
+  
   const filtered = classes.filter((c) => {
     if (c.status === "Available") return false;
-    if (
-      q &&
-      !`${c.subject} ${c.tutor} ${c.date}`
-        .toLowerCase()
-        .includes(q.toLowerCase())
-    )
-      return false;
-    if (statusFilter !== "all" && c.status !== statusFilter) return false;
+    if (RegisterTutor && c.tutorId !== RegisterTutor) return false;
     return true;
   });
-
+  
+  const stats = {
+    total: filtered.length,
+    upcoming: filtered.filter((c) => c.status === "Upcoming").length,
+    cancel: filtered.filter((c) => c.status === "Cancel").length,
+    finished: filtered.filter((c) => c.status === "Done").length,
+    pending: filtered.filter((c) => c.status === "Pending").length,
+  };
   return (
     <div className={styles.page}>
       <Header />

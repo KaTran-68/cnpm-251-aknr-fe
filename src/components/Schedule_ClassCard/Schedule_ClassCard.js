@@ -58,10 +58,9 @@ export default function ClassCard({ cls }) {
       <div className={styles.sep} />
       <div className={styles.tutorLabel}>Tutor</div>
       <div className={styles.tutor}>{cls.tutor}</div>
-
-      <div className={styles.actions}>
-        <button className={styles.viewBtn} onClick={() => navigate("/class")}><HiEye/> Xem chi tiết</button>
-      </div>
+      <button className={styles.viewBtn} onClick={() => navigate("/class")}>
+        <HiEye /> Xem chi tiết
+      </button>
     </div>
   );
 }

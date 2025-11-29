@@ -43,7 +43,7 @@ function RegisterSchedule_SV() {
   const [slots, setSlots] = useState([]);
   const [selected, setSelected] = useState({});
   const navigate = useNavigate();
-
+  const RegisterTutor = localStorage.getItem('RegisterTutor');
   useEffect(() => {
     async function fetchClasses() {
       try {
@@ -60,7 +60,7 @@ function RegisterSchedule_SV() {
   }, []);
 
   const filtered = slots.filter((c) => {
-    if (c.status === "Available") return true;
+    if (c.status === "Available" && c.tutor === RegisterTutor) return true;
     return false;
   });
 

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 import styles from "./TutorSelection.module.scss";
 import TutorDetailModal from "../../components/Tutor/TutorDetailModal/TutorDetailModal";
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { getTutorData } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 /**
  * Updated TutorSelection: click card -> open TutorDetailModal
  * Make sure path ../../components/... matches repo layout
@@ -58,7 +59,8 @@ export default function TutorSelection() {
   const [selectedTutor, setSelectedTutor] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [registering, setRegistering] = useState(false);
-
+  const navigate = useNavigate();
+  const role = localStorage.getItem('role');
   useEffect(() => {
     const fetchData = async () => {
       const response = await getTutorData();
@@ -90,13 +92,14 @@ export default function TutorSelection() {
       await new Promise((res) => setTimeout(res, 800));
       setModalOpen(false);
       alert(`Đăng ký thành công tutor: ${tutor.name}`);
+      localStorage.setItem('RegisterTutor', tutor.id);
+      navigate(`/${role}/home`, { replace: true });
     } catch (err) {
       alert("Đăng ký thất bại");
     } finally {
       setRegistering(false);
     }
   }
-
   return (
     <div className={styles.page}>
       <div className={styles.header}>
