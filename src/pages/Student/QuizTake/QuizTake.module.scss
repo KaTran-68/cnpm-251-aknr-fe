@@ -1,6 +1,16 @@
-// .wrapper {
-//     padding: 18px;
-// }
+.container {
+    position: relative;
+}
+
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.wrapper {
+    padding: 18px;
+}
 
 .contentFrame {
     border: 6px solid #2a82bd;

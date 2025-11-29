@@ -1,21 +1,28 @@
 @import '../../../assets/styles/_variables.scss';
 
-.footer {
-	position: fixed;
-	bottom: 0;
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background: linear-gradient(#eaf6ff, #fff);
 	width: 100%;
 }
-.wrapper {
-	// display: flex;
-	flex-direction: column;
-	height: 100%;
-	overflow-x: hidden;
+
+.container {
+	position: relative;
 }
+
+.footer {
+	position: relative; 
+	width: 100%;
+}
+
 .hero {
+	flex: 1;
 	max-width: 1200px;
 	width: min(1200px, calc(100% - 32px));
 	margin: 0 auto;
-	padding-top: 2%;
+	padding: 26px 10px 40px;
 }
 .contentFrame {
 	border: 6px solid #2a82bd;
@@ -62,6 +69,7 @@
 	color: #0b4f7c;
 }
 .studentId {
+	font-weight: 600;
 	color: #0b4f7c;
 }
 .notLoggedIn {

@@ -43,10 +43,6 @@ const QuizTake = () => {
 
   const handleSubmit = async () => {
     if (!quiz) return;
-    if (!studentName.trim()) {
-      alert('Vui lòng nhập họ tên trước khi nộp');
-      return;
-    }
     try {
       setSubmitting(true);
       const res = await submitQuiz(quiz._id, {
@@ -54,7 +50,7 @@ const QuizTake = () => {
         answers,
       });
       alert(`Nộp bài thành công. Điểm của bạn: ${res.data.score}`);
-      navigate('/');
+      navigate('/class');
     } catch (err) {
       alert(err.response?.data?.message || 'Nộp bài thất bại, vui lòng thử lại');
     } finally {
@@ -72,8 +68,9 @@ const QuizTake = () => {
   const currentQuestion = quiz.questions[current];
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Header />
+    <div className={styles.wrapper}>
       <div className={styles.contentFrame}>
         <div className={styles.leftCol}>
           <div className={styles.sideCard}>
@@ -84,18 +81,11 @@ const QuizTake = () => {
                 : 'Chưa chọn đáp án'}
             </div>
             <div className={styles.sideScore}>Điểm mỗi câu: 1</div>
-            <input
-              className="form-control"
-              placeholder="Họ và tên *"
-              value={studentName}
-              onChange={(e) => setStudentName(e.target.value)}
-              style={{ marginTop: 16 }}
-            />
           </div>
         </div>
 
         <div className={styles.centerCol}>
-          <div className={styles.timerBox}>Thời gian còn lại: 00:08:49</div>
+          <div className={styles.timerBox}>Thời gian còn lại: 00:36:36</div>
           <div className={styles.questionBox}>
             <div className={styles.questionText}>{currentQuestion.text}</div>
             <div className={styles.options}>
@@ -127,29 +117,35 @@ const QuizTake = () => {
                 </button>
               ))}
             </div>
-            <div style={{ marginTop: 20 }}>
-              <button className="btn btn-outline-primary" onClick={() => setCurrent(Math.max(0, current - 1))}>
-                Trang trước
-              </button>
+            <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '8px' }}>
+                <button className="btn btn-outline-primary" onClick={() => setCurrent(Math.max(0, current - 1))}>
+                  Trang trước
+                </button>
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={() => setCurrent(Math.min(quiz.questions.length - 1, current + 1))}
+                >
+                  Trang sau
+                </button>
+              </div>
               <button
                 className="btn btn-primary"
-                style={{ margin: '0 12px' }}
+                style={{ width: '100%' }}
                 onClick={handleSubmit}
                 disabled={submitting}
               >
                 {submitting ? 'Đang nộp...' : 'Nộp bài'}
               </button>
-              <button
-                className="btn btn-outline-primary"
-                onClick={() => setCurrent(Math.min(quiz.questions.length - 1, current + 1))}
-              >
-                Trang sau
-              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    {/* </div> */}
+    <div className={styles.footer}>
       <Footer />
+    </div>
     </div>
   );
 };

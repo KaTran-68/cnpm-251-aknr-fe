@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './TutorRegistration.module.scss';
 import Header from '../../components/Header/Header';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function TutorRegistration() {
   const [form, setForm] = useState({
@@ -37,6 +38,7 @@ export default function TutorRegistration() {
     // TODO: gọi API submit
   };
 
+  const navigate = useNavigate();
   return (
     <div className={styles.pageContainer}>
       <Header />
@@ -144,6 +146,7 @@ export default function TutorRegistration() {
             type="submit"
             disabled={!isValid()}
             aria-disabled={!isValid()}
+            onClick={() => navigate('/submitted-profiles')}
           >
             Tiếp tục
           </button>
