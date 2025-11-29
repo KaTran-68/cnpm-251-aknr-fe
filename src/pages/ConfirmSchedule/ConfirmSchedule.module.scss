@@ -147,7 +147,20 @@
   cursor: pointer;
   white-space: nowrap;
 }
-
+.btnReject {
+  background: red;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btnReject:hover {
+  background: #6d0101;
+}
 .btnConfirm:hover {
   background: #059669;
 }

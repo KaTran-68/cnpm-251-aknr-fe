@@ -4,6 +4,7 @@ import styles from './ForgotPassword.module.scss';
 import backgroundImg from '../../assets/images/background.png';
 import TSSLogo from '../../assets/images/logoTSS.png';
 import BKLogo from '../../assets/images/logoBK.png';
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
     // const navigate = useNavigate();
@@ -12,28 +13,10 @@ function ForgotPassword() {
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
+        setMessage('Vui lòng kiểm tra email để đặt lại mật khẩu.');
         e.preventDefault();
-        setLoading(true);
-        setMessage('');
-        try {
-            // Gửi request tới API /forgot-password
-            const res = await fetch('/forgot-password', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ emailOrUsername })
-            });
-            const data = await res.json();
-            if (data.message === 'success') {
-                setMessage('Vui lòng kiểm tra email để đặt lại mật khẩu.');
-            } else {
-                setMessage(data.message || 'Yêu cầu thất bại.');
-            }
-        } catch (err) {
-            setMessage('Lỗi kết nối server.');
-        }
-        setLoading(false);
     };
-
+    const navigate = useNavigate();
     return (
         <div className={styles.container}>
             <div className={styles.leftPanel}>
@@ -42,7 +25,7 @@ function ForgotPassword() {
                 <h2>Tutor Support System</h2>
             </div>
             <div className={styles.rightPanel}>
-                <img src={TSSLogo} alt="TSS Logo" />
+                <img src={TSSLogo} alt="TSS Logo" onClick={() => navigate("/")} style={{ cursor: 'pointer' }}/>
                 <h2 className={styles.title}>Quên mật khẩu</h2>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label htmlFor="emailOrUsername">Email hoặc tên đăng nhập</label>

@@ -82,6 +82,7 @@ const ConfirmSchedule = () => {
                       <th>Giờ học</th>
                       <th>Địa điểm / địa chỉ truy cập</th>
                       <th>Xác nhận</th>
+                      <th>Từ chối</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -95,6 +96,9 @@ const ConfirmSchedule = () => {
                           <td>{row.location}</td>
                           <td>
                             <button className={styles.btnConfirm}>Xác nhận</button>
+                          </td>
+                          <td>
+                            <button className={styles.btnReject}>Từ chối</button>
                           </td>
                         </tr>
                       ))
