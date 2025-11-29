@@ -265,6 +265,8 @@ const ClassDashboard = () => {
         <AttendanceModal
           show={showModal}
           onClose={() => setShowModal(false)}
+          onConfirm={handleConfirm}
+          defaultUser={currentUser}
         />
         <Notification
           show={notification.show}

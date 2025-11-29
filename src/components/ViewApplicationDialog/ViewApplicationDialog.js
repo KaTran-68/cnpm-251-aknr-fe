@@ -1,5 +1,6 @@
 import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt } from "react-icons/fa";
 import styles from "./ViewApplicationDialog.module.scss";
+import defaultAvt from "../../assets/images/default_avt.png";
 
 export default function ViewApplicationDialog({ data, onClose }) {
   const statusKey = data?.statusKey || (data?.status || "").toLowerCase();
@@ -23,7 +24,7 @@ export default function ViewApplicationDialog({ data, onClose }) {
 
         {/* AVATAR */}
         <div className={styles.avatarBox}>
-          <img src={data.avatar} alt="avatar" />
+          <img src={defaultAvt} alt="avatar" />
         </div>
 
         {/* --------- SECTION 1: THÔNG TIN CÁ NHÂN --------- */}

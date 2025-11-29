@@ -55,7 +55,7 @@ function LoginForm() {
         <h2>Tutor Support System</h2>
       </div>
       <div className={styles.rightPanel}>
-        <img src={TSSLogo} alt="TSS Logo" />
+        <img src={TSSLogo} alt="TSS Logo" onClick={() => navigate("/")} style={{cursor:'pointer'}} />
         <h2 className={styles.title}>Đăng nhập</h2>
         <form className={styles.form} onSubmit={handleLogin}>
           <label htmlFor="username">Tên đăng nhập</label>
