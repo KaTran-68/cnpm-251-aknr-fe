@@ -265,8 +265,6 @@ const ClassDashboard = () => {
         <AttendanceModal
           show={showModal}
           onClose={() => setShowModal(false)}
-          onConfirm={handleConfirm}
-          defaultUser={currentUser}
         />
         <Notification
           show={notification.show}
@@ -286,10 +284,11 @@ const ClassDashboard = () => {
         />
       </div>
     </div>
-      <div className={styles.footer}>   
+      <div className={styles.footer}>
         <Footer />
       </div>
     </div>
+
   );
 };
 
