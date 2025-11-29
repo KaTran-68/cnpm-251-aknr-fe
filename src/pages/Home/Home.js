@@ -43,8 +43,8 @@ function Home() {
   } else if (role === 'teacher') {
     bodyContent = (
       <div style={{ display: 'flex', gap: '3vw', marginBottom: '2rem' }}>
-        <button className={styles.tutorBtn}>Đăng ký làm Tutor</button>
-        <button className={styles.tutorBtn}>Xem hồ sơ đã nộp</button>
+        <button className={styles.tutorBtn} onClick={() => navigate('/tutor-registration')}>Đăng ký làm Tutor</button>
+        <button className={styles.tutorBtn} onClick={() => navigate('/submitted-profiles')}>Xem hồ sơ đã nộp</button>
       </div>
     );
   }

@@ -4,10 +4,7 @@ import AttendanceModal from '../../../components/Student/AttendanceModal/Attenda
 import Notification from '../../../components/Common/Notification/Notification';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import { confirmAttendance } from '../../../services/attendance';
-import MockAuthService from '../../../services/mockAuth';
-import MockDataProvider from '../../../services/mockData';
-import MockLoginModal from '../../../components/Common/MockLoginModal/MockLoginModal';
+import { getClassData } from '../../../services/api';
 import FeedbackModal from '../../../components/Student/FeedbackModal/FeedbackModal';
 import TranscriptModal from '../../../components/Student/TranscriptModal/TranscriptModal';
 import Header from '../../../components/Header/Header';
@@ -26,59 +23,72 @@ const ClassDashboard = () => {
   const [notification, setNotification] = useState({ show: false, message: '' });
   const [sessions, setSessions] = useState([]);
   const [selectedSessionId, setSelectedSessionId] = useState('');
-  const [quizzes, setQuizzes] = useState([]);
   const [loadingSessions, setLoadingSessions] = useState(true);
-  const [loadingQuizzes, setLoadingQuizzes] = useState(false);
   const [error, setError] = useState('');
-  const [creatingDemo, setCreatingDemo] = useState(false);
-  const [currentUser, setCurrentUser] = useState(MockAuthService.getCurrentUser());
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [showTranscriptModal, setShowTranscriptModal] = useState(false);
   const navigate = useNavigate();
+
+  // Get user info from localStorage
+  const currentUser = {
+    name: localStorage.getItem('name') || 'Nguyễn Văn A1',
+    studentId: localStorage.getItem('userId') || '24101100',
+    role: localStorage.getItem('role') || 'student'
+  };
 
   const selectedSession = useMemo(
     () => sessions.find((s) => s._id === selectedSessionId) || null,
     [sessions, selectedSessionId]
   );
 
-
-
   useEffect(() => {
     const fetchSessions = async () => {
       try {
         setLoadingSessions(true);
-        const sessions = await MockDataProvider.getSessions();
-        setSessions(sessions);
-        setSelectedSessionId(sessions[0]?._id || '');
+        const response = await getClassData();
+        
+        // Handle different response structures
+        const data = Array.isArray(response) ? response : 
+                     (response?.data && Array.isArray(response.data)) ? response.data : 
+                     [];
+        
+        // Filter classes for the current student
+        const studentClasses = data.filter(cls => 
+          cls.studentMssv === currentUser.studentId && 
+          (cls.status === 'Ongoing' || cls.status === 'Pending' || cls.status === 'Done')
+        );
+        
+        // Transform to session format
+        const formattedSessions = studentClasses.map((cls, index) => ({
+          _id: `${cls.studentMssv}-${cls.date}-${index}`,
+          title: `${cls.subject} - ${cls.tutor}`,
+          date: cls.date,
+          time: cls.time,
+          location: cls.location,
+          description: cls.descriptionClass,
+          status: cls.status,
+          subject: cls.subject,
+          tutor: cls.tutor
+        }));
+        
+        setSessions(formattedSessions);
+        setSelectedSessionId(formattedSessions[0]?._id || '');
         setError('');
       } catch (err) {
+        console.error('Error fetching sessions:', err);
         setError('Không tải được danh sách buổi học');
       } finally {
         setLoadingSessions(false);
       }
     };
-    fetchSessions();
-  }, []);
-
-  useEffect(() => {
-    if (!selectedSessionId) {
-      setQuizzes([]);
-      return;
+    
+    if (currentUser.studentId) {
+      fetchSessions();
+    } else {
+      setLoadingSessions(false);
+      setError('Vui lòng đăng nhập để xem lịch học');
     }
-    const fetchQuizzes = async () => {
-      try {
-        setLoadingQuizzes(true);
-        const quizzes = await MockDataProvider.getQuizzesBySession(selectedSessionId);
-        setQuizzes(quizzes);
-      } catch (err) {
-        setError('Không tải được quiz');
-      } finally {
-        setLoadingQuizzes(false);
-      }
-    };
-    fetchQuizzes();
-  }, [selectedSessionId]);
+  }, [currentUser.studentId]);
 
   const handleConfirm = async ({ studentName, studentId, password }) => {
     if (!selectedSessionId) {
@@ -86,18 +96,16 @@ const ClassDashboard = () => {
       return;
     }
     try {
-      const resolvedName = studentName || currentUser?.name;
-      const resolvedId = studentId || currentUser?.studentId;
-      if (!resolvedName) {
+      const resolvedName = studentName || currentUser.name;
+      const resolvedId = studentId || currentUser.studentId;
+      
+      if (!resolvedName || !resolvedId) {
         alert('Không tìm thấy thông tin sinh viên. Vui lòng đăng nhập lại.');
         return;
       }
-      // Hardcode: Always accept password "123"
-      if (password !== '123') {
-        alert('Mật khẩu không đúng. Mật khẩu đúng là: 123');
-        return;
-      }
-      // Simulate successful attendance
+      
+      // TODO: Call real attendance API when available
+      // For now, just show success
       setShowModal(false);
       setNotification({ show: true, message: 'Điểm danh thành công' });
     } catch (err) {
@@ -105,37 +113,15 @@ const ClassDashboard = () => {
     }
   };
 
-  const handleCreateDemoSession = async () => {
-    try {
-      setCreatingDemo(true);
-      const payload = {
-        title: 'Buổi học demo',
-        date: new Date().toISOString(),
-        location: 'meet.google.com/demo',
-        description: 'Buổi học dùng để thử nghiệm kết nối FE/BE',
-      };
-      const newSession = await MockDataProvider.createSession(payload);
-      setSessions((prev) => [newSession, ...prev]);
-      setSelectedSessionId(newSession._id);
-      setError('');
-    } catch (err) {
-      alert('Không thể tạo buổi học demo');
-    } finally {
-      setCreatingDemo(false);
-    }
-  };
-
-  const handleLoginSuccess = () => {
-    setCurrentUser(MockAuthService.getCurrentUser());
-  };
-
   const handleLogout = () => {
-    MockAuthService.logout();
-    setCurrentUser(null);
+    localStorage.removeItem('role');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
+    navigate('/');
   };
 
   const handleFeedbackSubmit = (feedback) => {
-    // Hardcode: Just show success message
+    // TODO: Call real feedback API when available
     setShowFeedbackModal(false);
     setNotification({ show: true, message: 'Gửi feedback thành công! Cảm ơn bạn đã đóng góp ý kiến.' });
   };
@@ -146,44 +132,43 @@ const ClassDashboard = () => {
       return (
         <div className={styles.emptyState}>
           <div>Chưa có buổi học nào.</div>
-          <button className="btn btn-dark" onClick={handleCreateDemoSession} disabled={creatingDemo}>
-            {creatingDemo ? 'Đang tạo...' : 'Tạo buổi demo'}
-          </button>
         </div>
       );
-
-    const dateLabel = selectedSession.date
-      ? new Date(selectedSession.date).toLocaleString('vi-VN')
-      : 'Chưa cập nhật thời gian';
+    
 
     return (
       <>
         <strong>{selectedSession.title}</strong>
-        <div className={styles.meta}>{dateLabel}</div>
-        <div className={styles.metaSmall}>Địa chỉ: {selectedSession.location || 'Chưa cập nhật'}</div>
+        <div className={styles.meta}>
+          {selectedSession.date} - {selectedSession.time}
+        </div>
+        <div className={styles.metaSmall}>Địa điểm: {selectedSession.location || 'Chưa cập nhật'}</div>
+        <div className={styles.metaSmall}>Trạng thái: {selectedSession.status}</div>
       </>
     );
   };
 
   return (
+    <div className={styles.container}>
+    <Header />
     <div className={styles.wrapper}>
-      <Header />
       <div className={styles.hero}>
         <div className={styles.contentFrame}>
           <div className={styles.card}>
             <div className={styles.studentInfoBar}>
-              {currentUser ? (
+              {currentUser.name ? (
                 <>
                   <span className={styles.studentName}>Sinh viên: {currentUser.name}</span>
                   {currentUser.studentId && (
                     <span className={styles.studentId}>MSSV: {currentUser.studentId}</span>
                   )}
-                  <button className="btn btn-sm btn-outline-secondary" onClick={handleLogout}>Đăng xuất</button>
                 </>
               ) : (
                 <>
                   <span className={styles.notLoggedIn}>Chưa đăng nhập</span>
-                  <button className="btn btn-sm btn-primary" onClick={() => setShowLoginModal(true)}>Đăng nhập</button>
+                  <button className="btn btn-sm btn-primary" onClick={() => navigate('/login')}>
+                    Đăng nhập
+                  </button>
                 </>
               )}
             </div>
@@ -218,40 +203,53 @@ const ClassDashboard = () => {
                     <div className={styles.itemBody}>
                       {s.key === 'attendance' && (
                         <div>
-                          <button className="btn btn-light" onClick={() => setShowModal(true)} disabled={!selectedSession}>
+                          <button 
+                            className="btn btn-light" 
+                            onClick={() => setShowModal(true)} 
+                            disabled={!selectedSession || !currentUser.name}
+                          >
                             ☆ Điểm danh
                           </button>
+                          {!currentUser.name && (
+                            <small className="text-muted ms-2">Vui lòng đăng nhập để điểm danh</small>
+                          )}
                         </div>
                       )}
                       {s.key === 'quiz' && (
-                        <div className={styles.quizList}>
-                          {loadingQuizzes && <div>Đang tải danh sách quiz...</div>}
-                          {!loadingQuizzes && quizzes.length === 0 && <div>Chưa có quiz nào cho buổi học này.</div>}
-                          {!loadingQuizzes &&
-                            quizzes.map((q) => (
-                              <div key={q._id} className={styles.quizRow}>
-                                <div className={styles.quizName} onClick={() => navigate(`/quiz/${q._id}`)}>
-                                  {q.title}
-                                </div>
-                                <div className={styles.quizAction}>
-                                  <button className="btn btn-dark" onClick={() => navigate(`/quiz/${q._id}`)}>
-                                    Làm
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
+                        <div>
+                          <button 
+                            className="btn btn-light" 
+                            onClick={() => navigate('/class/quiz/:quizId')} 
+                            disabled={!selectedSession || !currentUser.name}
+                          >
+                            Quiz
+                          </button>
+                          {!currentUser.name && (
+                            <small className="text-muted ms-2">Vui lòng đăng nhập để làm quiz</small>
+                          )}
                         </div>
                       )}
                       {s.key === 'feedback' && (
                         <div>
-                          <button className="btn btn-success" onClick={() => setShowFeedbackModal(true)} disabled={!selectedSession}>
+                          <button 
+                            className="btn btn-success" 
+                            onClick={() => setShowFeedbackModal(true)} 
+                            disabled={!selectedSession || !currentUser.name}
+                          >
                             📝 Gửi feedback
                           </button>
+                          {!currentUser.name && (
+                            <small className="text-muted ms-2">Vui lòng đăng nhập để gửi feedback</small>
+                          )}
                         </div>
                       )}
                       {s.key === 'minutes' && (
                         <div>
-                          <button className="btn btn-info" onClick={() => setShowTranscriptModal(true)} disabled={!selectedSession}>
+                          <button 
+                            className="btn btn-info" 
+                            onClick={() => setShowTranscriptModal(true)} 
+                            disabled={!selectedSession}
+                          >
                             📋 Xem biên bản buổi học
                           </button>
                         </div>
@@ -275,11 +273,6 @@ const ClassDashboard = () => {
           message={notification.message}
           onClose={() => setNotification({ ...notification, show: false })}
         />
-        <MockLoginModal
-          show={showLoginModal}
-          onClose={() => setShowLoginModal(false)}
-          onLoginSuccess={handleLoginSuccess}
-        />
         <FeedbackModal
           show={showFeedbackModal}
           onClose={() => setShowFeedbackModal(false)}
@@ -292,7 +285,10 @@ const ClassDashboard = () => {
           sessionData={selectedSession}
         />
       </div>
-      <Footer />
+    </div>
+      <div className={styles.footer}>   
+        <Footer />
+      </div>
     </div>
   );
 };

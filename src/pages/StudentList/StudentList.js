@@ -95,7 +95,7 @@ const StudentList = () => {
             <button className={styles.btnBack} onClick={() => navigate(-1)}>
                 ← Quay lại
             </button>
-            <h2 className={styles.pageTitle}>DANH SÁCH SINH VIÊN</h2>
+            <h2 className={styles.pageTitle}>Danh sách sinh viên</h2>
           </div>
 
           <div className={styles.searchRow}>
