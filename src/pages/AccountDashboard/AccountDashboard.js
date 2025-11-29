@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styles from './AccountDashboard.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 function AccountDashboard({}) {
   const { role } = useParams();
