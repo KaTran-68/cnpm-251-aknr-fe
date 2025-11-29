@@ -1,10 +1,12 @@
 import React from "react";
 import styles from "./Schedule_ClassCard.module.scss";
 import { HiEye } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 /**
  * Simple class card used in ScheduleView
  */
 export default function ClassCard({ cls }) {
+  const navigate = useNavigate();
   const statusLabel = {
     "Upcoming": { text: "Sắp diễn ra", className: styles.tagUpcoming },
     "Done": { text: "Đã kết thúc", className: styles.tagFinished },
@@ -57,8 +59,8 @@ export default function ClassCard({ cls }) {
       <div className={styles.tutorLabel}>Tutor</div>
       <div className={styles.tutor}>{cls.tutor}</div>
 
-      <div className={styles.actions} style={{ display: 'flex', justifyContent: 'center' }}>
-        <button className={styles.viewBtn}><HiEye /> Xem chi tiết</button>
+      <div className={styles.actions}>
+        <button className={styles.viewBtn} onClick={() => navigate("/class")}><HiEye/> Xem chi tiết</button>
       </div>
     </div>
   );
