@@ -21,6 +21,7 @@ import ScheduleView from "../pages/ScheduleView/ScheduleView";
 import RegisterScheduleSV from "../pages/RegisterSchedule_SV/RegisterSchedule_SV";
 import TutorList from "../pages/TutorManagement/TutorList";
 import ClassList from "../pages/ClassManagement/ClassList";
+import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 
 const AppRoutes = () => {
   return (
@@ -28,26 +29,26 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<RoleSelect />} />
         <Route path="/login" element={<LoginForm />} />
-        <Route path=":role/home" element={<Home />} />
-        <Route path=":role/account" element={<AccountDashboard />} />
-        <Route path=":role/change-password" element={<ChangePassword />} />
-        <Route path=":role/register" element={<RegisterSchedule />} />
-        <Route path="tutor/view" element={<ViewSchedule />} />
-        <Route path="tutor/confirm" element={<ConfirmSchedule />} />
-        <Route path="tutor/students" element={<StudentList />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/class" element={<ClassDashboard/>} />
-        <Route path="/class/quiz/:quizId" element={<QuizTake />} />
-        <Route path="/class/tutor" element={<ClassManager />} />
-        <Route path="/class/tutor/create-quiz" element={<QuizCreate />} />
-        <Route path="/tutor-registration" element={<TutorRegistration />} />
-        <Route path="/submitted-profiles" element={<SubmittedProfiles />} />
-        <Route path="/tutor-selection" element={<TutorSelection />} />
-        <Route path="/spaces" element={<ScheduleView />} />
-        <Route path="/register-schedule-sv" element={<RegisterScheduleSV />} />
-        <Route path="/tutor-list" element={<TutorList />} />
-        <Route path="/class-list" element={<ClassList />} />
-        
+        <Route path=":role/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path=":role/account" element={<PrivateRoute><AccountDashboard /></PrivateRoute>} />
+        <Route path=":role/change-password" element={<PrivateRoute><ChangePassword /></PrivateRoute>} />
+        <Route path=":role/register" element={<PrivateRoute><RegisterSchedule /></PrivateRoute>} />
+        <Route path="tutor/view" element={<PrivateRoute><ViewSchedule /></PrivateRoute>} />
+        <Route path="tutor/confirm" element={<PrivateRoute><ConfirmSchedule /></PrivateRoute>} />
+        <Route path="tutor/students" element={<PrivateRoute><StudentList /></PrivateRoute>} />
+        <Route path="/class" element={<PrivateRoute><ClassDashboard /></PrivateRoute>} />
+        <Route path="/class/quiz/:quizId" element={<PrivateRoute><QuizTake /></PrivateRoute>} />
+        <Route path="/class/tutor" element={<PrivateRoute><ClassManager /></PrivateRoute>} />
+        <Route path="/class/tutor/create-quiz" element={<PrivateRoute><QuizCreate /></PrivateRoute>} />
+        <Route path="/tutor-registration" element={<PrivateRoute><TutorRegistration /></PrivateRoute>} />
+        <Route path="/submitted-profiles" element={<PrivateRoute><SubmittedProfiles /></PrivateRoute>} />
+        <Route path="/tutor-selection" element={<PrivateRoute><TutorSelection /></PrivateRoute>} />
+        <Route path="/spaces" element={<PrivateRoute><ScheduleView /></PrivateRoute>} />
+        <Route path="/register-schedule-sv" element={<PrivateRoute><RegisterScheduleSV /></PrivateRoute>} />
+        <Route path="/tutor-list" element={<PrivateRoute><TutorList /></PrivateRoute>} />
+        <Route path="/class-list" element={<PrivateRoute><ClassList /></PrivateRoute>} />
+
         {/* <Route path="*" element={<Navigate to="/spaces" replace />} /> */}
       </Routes>
     </Router>

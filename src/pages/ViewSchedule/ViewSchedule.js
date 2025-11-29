@@ -56,7 +56,7 @@ const ViewSchedule = () => {
           const scheduleData = response.data
             .filter(item => item.status !== "Available" && item.subject) // Exclude empty slots
             .map((item, index) => {
-              const [startHour] = item.time.split(':');
+              // const [startHour] = item.time.split(':');
               const [startTime, endTime] = item.time.split('-');
               const duration = parseInt(endTime.split(':')[0]) - parseInt(startTime.split(':')[0]);
               

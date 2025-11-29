@@ -10,7 +10,6 @@ export default function TutorDetailModal({
 }) {
   const closeBtnRef = useRef(null);
   const lastActiveRef = useRef(null);
-
   useEffect(() => {
     if (!open) return;
 
@@ -32,7 +31,6 @@ export default function TutorDetailModal({
   }, [open, onClose]);
 
   if (!open || !tutor) return null;
-
   return (
     <div
       className={styles.backdrop}

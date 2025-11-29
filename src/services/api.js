@@ -1,5 +1,4 @@
 import axios from "axios";
-import { data } from "react-router-dom";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:6868";
 
@@ -38,10 +37,10 @@ export const AuthLogin = async (username, password, role) => {
       return response.data;
     }
   } catch (error) {
-    if (error.status == 401) {
+    if (error.response && error.response.status === 401) {
       return { auth: false, data: "Thông tin đăng nhập không đúng" };
     }
-    else if (error.status == 400) {
+    else if (error.response && error.response.status === 400) {
       return { auth: false, data: "Vui lòng nhập tài khoản và mật khẩu" };
     }
   }
