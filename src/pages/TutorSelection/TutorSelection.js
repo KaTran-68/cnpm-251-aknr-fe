@@ -3,7 +3,6 @@ import styles from "./TutorSelection.module.scss";
 import TutorDetailModal from "../../components/Tutor/TutorDetailModal/TutorDetailModal";
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import { UNSAFE_DataWithResponseInit } from "react-router-dom";
 import { getTutorData } from "../../services/api";
 /**
  * Updated TutorSelection: click card -> open TutorDetailModal
@@ -99,9 +98,10 @@ export default function TutorSelection() {
   }
 
   return (
-    <>
-    <Header/>
     <div className={styles.page}>
+      <div className={styles.header}>
+        <Header />
+      </div>
       <div className={styles.frameBg}>
         <div className={styles.searchBar}>
           <input
@@ -120,9 +120,8 @@ export default function TutorSelection() {
               return (
                 <div
                   key={t.id}
-                  className={`${styles.cardShell} ${
-                    selected ? styles.selectedWrapper : ""
-                  }`}
+                  className={`${styles.cardShell} ${selected ? styles.selectedWrapper : ""
+                    }`}
                   onClick={() => openDetail(t)}
                   role="button"
                   tabIndex={0}
@@ -147,7 +146,9 @@ export default function TutorSelection() {
           </div>
         </div>
       </div>
-    <Footer />
+      <div className={styles.footer}>
+        <Footer />
+      </div>
 
       <TutorDetailModal
         open={modalOpen}
@@ -157,6 +158,5 @@ export default function TutorSelection() {
         registering={registering}
       />
     </div>
-  </>
   );
 }

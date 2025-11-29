@@ -1,16 +1,21 @@
 @import '../../../assets/styles/_variables.scss';
 
-.wrapper {
-	background: linear-gradient(#eaf6ff, #fff);
-	padding: 26px 0 40px;
-	min-height: 100%;
+.footer {
+	position: fixed;
+	bottom: 0;
 	width: 100%;
+}
+.wrapper {
+	// display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow-x: hidden;
 }
 .hero {
 	max-width: 1200px;
 	width: min(1200px, calc(100% - 32px));
 	margin: 0 auto;
-	padding: 10px;
+	padding-top: 2%;
 }
 .contentFrame {
 	border: 6px solid #2a82bd;
