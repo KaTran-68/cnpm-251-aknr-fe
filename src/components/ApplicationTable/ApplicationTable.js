@@ -2,7 +2,7 @@ import { FaEye, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import styles from "./ApplicationTable.module.scss";
 import { APP_STATUSES } from "../../constants/statuses";
 
-export default function ApplicationTable({ applications = [], onView }) {
+export default function ApplicationTable({ applications = [], onView, onApprove, onReject }) {
   // Map status from API to display format
   const getStatusInfo = (status) => {
     const statusLower = status?.toLowerCase();
@@ -56,10 +56,16 @@ export default function ApplicationTable({ applications = [], onView }) {
 
                     {statusInfo.key === APP_STATUSES.PENDING.key && (
                       <>
-                        <button className={`${styles.actionBtn} ${styles.approve}`}>
+                        <button 
+                          className={`${styles.actionBtn} ${styles.approve}`}
+                          onClick={() => onApprove(index)}
+                        >
                           <FaCheckCircle /> Duyệt
                         </button>
-                        <button className={`${styles.actionBtn} ${styles.reject}`}>
+                        <button 
+                          className={`${styles.actionBtn} ${styles.reject}`}
+                          onClick={() => onReject(index)}
+                        >
                           <FaTimesCircle /> Từ chối
                         </button>
                       </>

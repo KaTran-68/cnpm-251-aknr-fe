@@ -11,6 +11,7 @@ const ConfirmSchedule = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [classData, setClassData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [notification, setNotification] = useState({ show: false, message: "", type: "" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +38,42 @@ const ConfirmSchedule = () => {
     fetchData();
   }, []);
 
+  const handleConfirm = (index) => {
+    // Remove the item from the list
+    const newData = classData.filter((_, i) => i !== index);
+    setClassData(newData);
+    
+    // Show notification
+    setNotification({
+      show: true,
+      message: "Đã xác nhận lịch dạy thành công!",
+      type: "success"
+    });
+
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+    }, 3000);
+  };
+
+  const handleReject = (index) => {
+    // Remove the item from the list
+    const newData = classData.filter((_, i) => i !== index);
+    setClassData(newData);
+    
+    // Show notification
+    setNotification({
+      show: true,
+      message: "Đã từ chối lịch dạy!",
+      type: "error"
+    });
+
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+    }, 3000);
+  };
+
   const filteredData = classData.filter((item) =>
     item.student?.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -44,6 +81,12 @@ const ConfirmSchedule = () => {
   return (
     <div className={styles.wrapper}>
       <Header />
+
+      {notification.show && (
+        <div className={`${styles.notification} ${styles[notification.type]}`}>
+          {notification.message}
+        </div>
+      )}
 
       <div className={styles.container}>
         <div className={styles.headerSection}>
@@ -95,16 +138,26 @@ const ConfirmSchedule = () => {
                           <td>{row.time}</td>
                           <td>{row.location}</td>
                           <td>
-                            <button className={styles.btnConfirm}>Xác nhận</button>
+                            <button 
+                              className={styles.btnConfirm}
+                              onClick={() => handleConfirm(index)}
+                            >
+                              Xác nhận
+                            </button>
                           </td>
                           <td>
-                            <button className={styles.btnReject}>Từ chối</button>
+                            <button 
+                              className={styles.btnReject}
+                              onClick={() => handleReject(index)}
+                            >
+                              Từ chối
+                            </button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="6" style={{ textAlign: 'center' }}>
+                        <td colSpan="7" style={{ textAlign: 'center' }}>
                           Không có lịch dạy cần xác nhận
                         </td>
                       </tr>

@@ -8,13 +8,14 @@
 
 .container {
   flex: 1;
-  padding: 24px;
+  padding: 24px 48px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto auto;
   gap: 20px;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .headerSection {
@@ -29,7 +30,7 @@
 
 .btnBack {
   position: absolute;
-  left: -10rem;
+  left: 0;
   background: #4a9fd8;
   color: #fff;
   border: none;
@@ -51,7 +52,7 @@
   grid-row: 2;
   justify-self: center;
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
 .formArea {
@@ -154,7 +155,7 @@
 
 .formRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 12px;
   margin-bottom: 12px;
 }

@@ -22,6 +22,7 @@ export default function TutorList() {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [notification, setNotification] = useState({ show: false, message: "", type: "" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +45,35 @@ export default function TutorList() {
     fetchData();
   }, []);
 
+  const showNotification = (message, type) => {
+    setNotification({ show: true, message, type });
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+    }, 3000);
+  };
+
+  const handleApprove = (index) => {
+    const updatedApplications = [...applications];
+    updatedApplications[index] = {
+      ...updatedApplications[index],
+      status: "Approved",
+      dayRespond: new Date().toLocaleDateString('en-GB')
+    };
+    setApplications(updatedApplications);
+    showNotification("Đã duyệt đơn thành công!", "success");
+  };
+
+  const handleReject = (index) => {
+    const updatedApplications = [...applications];
+    updatedApplications[index] = {
+      ...updatedApplications[index],
+      status: "Rejected",
+      dayRespond: new Date().toLocaleDateString('en-GB')
+    };
+    setApplications(updatedApplications);
+    showNotification("Đã từ chối đơn!", "error");
+  };
+
   // Calculate statistics
   const stats = {
     total: applications.length,
@@ -61,6 +91,13 @@ export default function TutorList() {
   return (
     <>
       <Header />
+      
+      {notification.show && (
+        <div className={`${styles.notification} ${styles[notification.type]}`}>
+          {notification.message}
+        </div>
+      )}
+      
       <div className={styles.container}>
         {/* BLUE TOP AREA */}
         <div className={styles.topArea}>
@@ -118,7 +155,9 @@ export default function TutorList() {
           ) : (
             <ApplicationTable 
               applications={filteredApplications}
-              onView={(row) => setViewData(row)} 
+              onView={(row) => setViewData(row)}
+              onApprove={handleApprove}
+              onReject={handleReject}
             />
           )}
 

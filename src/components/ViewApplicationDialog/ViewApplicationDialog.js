@@ -16,15 +16,17 @@ export default function ViewApplicationDialog({ data, onClose }) {
 
         {/* HEADER */}
         <div className={styles.header}>
-          <h2>Chi tiết đơn đăng kí Tutor</h2>
-          <span className={`${styles.badge} ${styles[statusKey]}`}>
-            {data.status}
-          </span>
-        </div>
-
-        {/* AVATAR */}
-        <div className={styles.avatarBox}>
-          <img src={defaultAvt} alt="avatar" />
+          <div className={styles.headerLeft}>
+            <h2>Chi tiết đơn đăng kí Tutor</h2>
+            <span className={`${styles.badge} ${styles[statusKey]}`}>
+              {data.status}
+            </span>
+          </div>
+          
+          {/* AVATAR */}
+          <div className={styles.avatarBox}>
+            <img src={defaultAvt} alt="avatar" />
+          </div>
         </div>
 
         {/* --------- SECTION 1: THÔNG TIN CÁ NHÂN --------- */}
@@ -54,7 +56,7 @@ export default function ViewApplicationDialog({ data, onClose }) {
             <span>Mô tả</span>
           </div>
 
-          <label>Mô tả của tutor</label>
+          {/* <label>Mô tả của tutor</label> */}
           <p>{data.description}</p>
         </div>
 
