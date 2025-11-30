@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,11 +10,11 @@
 
 .panel {
   background: #fff;
-  width: 420px;
+  width: calc(100% - 30vh);
   padding: 22px;
   border-radius: 16px;
-  max-height: 90vh;
-  overflow-y: auto;
+  // max-height: 90vh;
+  // overflow-y: auto;
 }
 
 /* ===== TITLE ===== */
@@ -25,7 +25,7 @@
 }
 
 /* ensure the left block stacks title/sub/status neatly */
-.titleRow > div {
+.titleRow>div {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -76,15 +76,18 @@
   background: #f5e6ff;
   color: #9b00d7;
 }
-
-.ongoing {
-  background: #e6ffe9;
-  color: #0c973a;
+.done {
+  background: #e8f0ff;
+  color: #1780d2;
 }
 
-.ended {
-  background: #ffe5e5;
-  color: #d12626;
+.cancel {
+  background: #ffe8e8;
+  color: #d93c3c;
+}
+.pending {
+  background: #e6ffe9;
+  color: #0c973a;
 }
 
 /* ===== SECTION CARD ===== */
@@ -110,6 +113,7 @@
   font-size: 12px;
   color: #888;
   margin: 0 0 6px;
+  text-align: left;
 }
 
 /* nội dung màu đen */

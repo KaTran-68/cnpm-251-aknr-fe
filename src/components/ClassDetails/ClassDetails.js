@@ -34,28 +34,25 @@ export default function ClassDetails({ data, onClose }) {
 
           <div className={styles.grid}>
             <div>
-              <p className={styles.label}>Sinh viên đăng kí</p>
-              <p>{data.student || "Nguyễn Văn C"}</p>
+              <p className={styles.label}>Sinh viên đăng kí: {data.student || "Nguyễn Văn C"}</p>
+              {/* <p>{data.student || "Nguyễn Văn C"}</p> */}
             </div>
 
             <div>
-              <p className={styles.label}>Địa điểm học</p>
-              <p>📹 Online</p>
+              <p className={styles.label}>Địa điểm học: {data.location || "Online"}</p>
             </div>
 
             <div>
-              <p className={styles.label}>MSSV đăng kí</p>
-              <p>{data.studentId || "2412341"}</p>
+              <p className={styles.label}>MSSV đăng kí: {data.studentId || "2412341"}</p>
             </div>
 
             <div>
-              <p className={styles.label}>Lịch học</p>
-              <p>Thứ 2, 20/9/2025, 7:00 AM - 9:00 AM</p>
+              <p className={styles.label}>Lịch học: {data.time} - {data.date}</p> 
             </div>
 
             <div className={styles.fullRow}>
-              <p className={styles.label}>Mô tả</p>
-              <p>Dành cho các bạn muốn 10+</p>
+              <p className={styles.label}>Mô tả:</p>
+              <p style={{ textAlign: "left" }}>{data.description || ""}</p>
             </div>
           </div>
         </div>
@@ -69,34 +66,22 @@ export default function ClassDetails({ data, onClose }) {
 
           <div className={styles.grid}>
             <div>
-              <p className={styles.label}>Họ và tên</p>
-              <p>{data.tutor}</p>
+              <p className={styles.label}>Họ và tên: {data.tutor}</p>
             </div>
 
             <div>
-              <p className={styles.label}>MSSV/MSCB</p>
-              <p>2213435</p>
+              <p className={styles.label}>MSSV/MSCB: {data.tutorId || "2213435"}</p>
+            </div>
+            <div className={styles.fullRow}>
+              <p className={styles.label}>Email: {data.tutorEmail || "a.nguyen12345@hcmut.edu.vn"}</p>
             </div>
 
             <div className={styles.fullRow}>
-              <p className={styles.label}>Email</p>
-              <p>
-                <FaEnvelope className={styles.icon} />
-                a.nguyen12345@hcmut.edu.vn
-              </p>
+              <p className={styles.label}>Số điện thoại: {data.tutorPhone || "0123456789"}</p>
             </div>
-
             <div className={styles.fullRow}>
-              <p className={styles.label}>Số điện thoại</p>
-              <p>
-                <FaPhone className={styles.icon} />
-                0123456789
-              </p>
-            </div>
-
-            <div className={styles.fullRow}>
-              <p className={styles.label}>Mô tả</p>
-              <p>Giải tích 1, Vật lý 1, Kỹ thuật lập trình</p>
+              <p className={styles.label}>Mô tả:</p>
+              <p style={{ textAlign: "left" }}>{data.tutorDescription || "Giải tích 1, Vật lý 1, Kỹ thuật lập trình"}</p>
             </div>
           </div>
         </div>

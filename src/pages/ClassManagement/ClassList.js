@@ -34,38 +34,38 @@ export default function ClassList() {
                      [];
         
         // Map API data to component format
-        const formattedClasses = data.map(cls => {
-          // Map API status to frontend status
-          let statusKey = CLASS_STATUSES.ONGOING.key;
-          let statusLabel = CLASS_STATUSES.ONGOING.label;
-          
-          const apiStatus = cls.status?.toLowerCase();
-          if (apiStatus === 'pending') {
-            statusKey = CLASS_STATUSES.UPCOMING.key;
-            statusLabel = CLASS_STATUSES.UPCOMING.label;
-          } else if (apiStatus === 'done' || apiStatus === 'cancel') {
-            statusKey = CLASS_STATUSES.ENDED.key;
-            statusLabel = CLASS_STATUSES.ENDED.label;
-          } else if (apiStatus === 'ongoing') {
-            statusKey = CLASS_STATUSES.ONGOING.key;
-            statusLabel = CLASS_STATUSES.ONGOING.label;
-          }
-          
-          return {
-            name: cls.subject,
-            tutor: cls.tutor,
-            tutorId: cls.tutorId,
-            student: cls.student,
-            studentMssv: cls.studentMssv,
-            date: cls.date,
-            time: cls.time,
-            location: cls.location,
-            description: cls.descriptionClass,
-            status: statusLabel,
-            statusKey: statusKey,
-            originalStatus: cls.status
-          };
-        });
+        const formattedClasses = data
+          .filter(cls => cls.status?.toLowerCase() !== 'available')
+          .map(cls => {
+            // Map API status to frontend status
+            let statusKey = CLASS_STATUSES.UPCOMING.key;
+            let statusLabel = CLASS_STATUSES.UPCOMING.label;
+            const apiStatus = cls.status?.toLowerCase();
+            if (apiStatus === 'pending') {
+              statusKey = CLASS_STATUSES.PENDING.key;
+              statusLabel = CLASS_STATUSES.PENDING.label;
+            } else if (apiStatus === 'done') {
+              statusKey = CLASS_STATUSES.DONE.key;
+              statusLabel = CLASS_STATUSES.DONE.label;
+            } else if (apiStatus === 'cancel') {
+              statusKey = CLASS_STATUSES.CANCEL.key;
+              statusLabel = CLASS_STATUSES.CANCEL.label;
+            }
+            return {
+              name: cls.subject,
+              tutor: cls.tutor,
+              tutorId: cls.tutorId,
+              student: cls.student,
+              studentMssv: cls.studentMssv,
+              date: cls.date,
+              time: cls.time,
+              location: cls.location,
+              description: cls.descriptionClass,
+              status: statusLabel,
+              statusKey: statusKey,
+              originalStatus: cls.status
+            };
+          });
         
         setClasses(formattedClasses);
       } catch (error) {
@@ -96,10 +96,11 @@ export default function ClassList() {
 
   // Calculate statistics
   const stats = {
-    total: classes.length,
+    total: classes.length - classes.filter(cls => cls.statusKey === CLASS_STATUSES.AVAILABLE.key).length,
     upcoming: classes.filter(cls => cls.statusKey === CLASS_STATUSES.UPCOMING.key).length,
-    ongoing: classes.filter(cls => cls.statusKey === CLASS_STATUSES.ONGOING.key).length,
-    ended: classes.filter(cls => cls.statusKey === CLASS_STATUSES.ENDED.key).length
+    done: classes.filter(cls => cls.statusKey === CLASS_STATUSES.DONE.key).length,
+    pending: classes.filter(cls => cls.statusKey === CLASS_STATUSES.PENDING.key).length,
+    cancel: classes.filter(cls => cls.statusKey === CLASS_STATUSES.CANCEL.key).length,
   };
 
 
@@ -115,10 +116,11 @@ export default function ClassList() {
         {/* ----- STATISTIC CARDS (Unified Format) ----- */}
         <div className={styles.statsRow}>
           {[
-            { title: "Tổng số lớp", num: stats.total, icon: <FaBookOpen />, color: "Blue" },
+            { title: "Tổng số lớp", num: stats.total, icon: <FaBookOpen />, color: "Orange" },
             { title: "Sắp diễn ra", num: stats.upcoming, icon: <FaRegClock />, color: "Purple" },
-            { title: "Đang diễn ra", num: stats.ongoing, icon: <FaUsers />, color: "Green" },
-            { title: "Đã kết thúc", num: stats.ended, icon: <FaCheckCircle />, color: "Red" },
+            { title: "Đã kết thúc", num: stats.done, icon: <FaCheckCircle />, color: "Blue" },
+            { title: "Chờ xác nhận", num: stats.pending, icon: <FaRegClock />, color: "Green" },
+            { title: "Đã bị hủy", num: stats.cancel, icon: <FaUsers />, color: "Red" },
           ].map((item, idx) => (
             <div className={styles.statCard} key={idx}>
               <div className={styles.statInfo}>

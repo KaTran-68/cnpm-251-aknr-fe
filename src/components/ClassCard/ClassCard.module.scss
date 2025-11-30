@@ -43,14 +43,19 @@
   color: #a20dd0;
 }
 
-.statusOngoing {
-  background: #e7ffe8;
-  color: #0da640;
+.statusPending {
+  background: #eaffea;
+  color: #2ea54a;
 }
 
 .statusEnded {
-  background: #ffe2e2;
-  color: #d81c1c;
+  background: #e8f0ff;
+  color: #1780d2;
+}
+
+.statusCancelled{
+  background: #ffe8e8;
+  color: #d93c3c;
 }
 
 /* INFO */
