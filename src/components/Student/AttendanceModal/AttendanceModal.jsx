@@ -28,10 +28,18 @@ const AttendanceModal = ({ show, onClose, onConfirm, defaultUser }) => {
     const resolvedName = defaultUser?.name || form.studentName.trim();
     const resolvedId = defaultUser?.studentId || form.studentId.trim();
     const resolvedPassword = form.password.trim();
+    
     if (!resolvedName || !resolvedPassword) {
       alert('Vui lòng nhập đầy đủ thông tin bắt buộc');
       return;
     }
+    
+    // Validate password
+    if (resolvedPassword !== 'aknr++') {
+      alert('Mật khẩu điểm danh không đúng!');
+      return;
+    }
+    
     onConfirm({
       studentName: resolvedName,
       studentId: resolvedId,
