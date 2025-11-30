@@ -71,7 +71,7 @@ function LoginForm() {
           <div className={styles.passwordWrapper}>
             <input
               id="password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
