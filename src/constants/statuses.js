@@ -1,8 +1,10 @@
 // Centralized status definitions for classes and applications
 export const CLASS_STATUSES = {
+  DONE: { key: "done", label: "Đã kết thúc" },
   UPCOMING: { key: "upcoming", label: "Sắp diễn ra" },
-  ONGOING: { key: "ongoing", label: "Đang diễn ra" },
-  ENDED: { key: "ended", label: "Đã kết thúc" },
+  AVAILABLE: { key: "available", label: "Có sẵn" },
+  CANCEL: { key: "cancel", label: "Đã bị hủy" },
+  PENDING: { key: "pending", label: "Chờ xác nhận" },
 };
 
 export const APP_STATUSES = {

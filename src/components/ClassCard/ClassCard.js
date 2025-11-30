@@ -7,11 +7,13 @@ export default function ClassCard({ data, onView }) {
 
   // map statusKey to module class
   const statusClass =
-    statusKey === "Upcoming"
+    statusKey === "upcoming"
       ? styles.statusUpcoming
-      : statusKey === "Ongoing"
-      ? styles.statusOngoing
-      : styles.statusEnded;
+      : statusKey === "pending"
+        ? styles.statusPending
+        : statusKey === "done"
+          ? styles.statusEnded
+          : styles.statusCancelled;
 
   return (
     <div className={styles.card}>
@@ -21,8 +23,9 @@ export default function ClassCard({ data, onView }) {
           <h3 className={styles.className}>{tutor}</h3>
           <p className={styles.subject}>{name}</p>
         </div>
-
-        <span className={`${styles.statusTag} ${statusClass}`}>{status}</span>
+        <span className={`${styles.statusTag} ${statusClass}`}>
+          {status}
+        </span>
       </div>
 
       {/* Info */}
