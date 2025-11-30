@@ -5,6 +5,7 @@ import TutorRegDetails from '../../components/TutorRegDetails/TutorRegDetails';
 import { APP_STATUSES } from '../../constants/statuses';
 import Header from '../../components/Header/Header';
 import { getApplicationData } from '../../services/api';
+import { HiEye } from "react-icons/hi";
 
 export default function SubmittedProfiles() {
   const [viewData, setViewData] = useState(null);
@@ -104,7 +105,7 @@ export default function SubmittedProfiles() {
                     </td>
                     <td>
                       <button className={styles.viewBtn} onClick={() => setViewData(app)}>
-                        Xem chi tiết
+                        <HiEye /> Xem chi tiết
                       </button>
                     </td>
                   </tr>

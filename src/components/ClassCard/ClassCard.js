@@ -1,5 +1,6 @@
 import { FaCalendarAlt, FaVideo } from "react-icons/fa";
 import styles from "./ClassCard.module.scss";
+import { HiEye } from "react-icons/hi";
 
 
 export default function ClassCard({ data, onView }) {
@@ -49,7 +50,7 @@ export default function ClassCard({ data, onView }) {
       {/* Footer */}
       <div className={styles.footer}>
         <button className={styles.detailBtn} onClick={onView}>
-          ⓘ Xem chi tiết
+          <HiEye /> Xem chi tiết 
         </button>
       </div>
     </div>

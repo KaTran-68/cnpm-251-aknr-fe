@@ -23,6 +23,11 @@ export default function TutorList() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [notification, setNotification] = useState({ show: false, message: "", type: "" });
+  const [activeFilters, setActiveFilters] = useState({
+    status: "",
+    dateFrom: "",
+    dateTo: ""
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +79,46 @@ export default function TutorList() {
     showNotification("Đã từ chối đơn!", "error");
   };
 
+  const handleApplyFilters = (filters) => {
+    setActiveFilters(filters);
+  };
+
+  // Parse date string (dd/mm/yyyy) to Date object
+  const parseDate = (dateStr) => {
+    if (!dateStr) return null;
+    const [day, month, year] = dateStr.split('/');
+    return new Date(year, month - 1, day);
+  };
+
+  // Filter applications by search term and active filters
+  const filteredApplications = applications.filter(app => {
+    // Search filter
+    const matchesSearch = app.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          app.mssv?.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Status filter
+    const matchesStatus = !activeFilters.status || 
+                          app.status?.toLowerCase() === activeFilters.status.toLowerCase();
+    
+    // Date range filter
+    let matchesDate = true;
+    if (activeFilters.dateFrom || activeFilters.dateTo) {
+      const appDate = parseDate(app.daySubmit);
+      if (appDate) {
+        if (activeFilters.dateFrom) {
+          const fromDate = new Date(activeFilters.dateFrom);
+          matchesDate = matchesDate && appDate >= fromDate;
+        }
+        if (activeFilters.dateTo) {
+          const toDate = new Date(activeFilters.dateTo);
+          matchesDate = matchesDate && appDate <= toDate;
+        }
+      }
+    }
+    
+    return matchesSearch && matchesStatus && matchesDate;
+  });
+
   // Calculate statistics
   const stats = {
     total: applications.length,
@@ -81,12 +126,6 @@ export default function TutorList() {
     approved: applications.filter(app => app.status === "Approved" || app.status === "approved").length,
     rejected: applications.filter(app => app.status === "Rejected" || app.status === "rejected").length,
   };
-
-  // Filter applications by search term
-  const filteredApplications = applications.filter(app =>
-    app.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    app.mssv?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <>
@@ -162,7 +201,12 @@ export default function TutorList() {
           )}
 
           {/* Filter Sidebar */}
-          {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+          {showFilter && (
+            <AdvancedFilters 
+              onClose={() => setShowFilter(false)} 
+              onApply={handleApplyFilters}
+            />
+          )}
 
           {/* View Detail Popup */}
           {viewData && (

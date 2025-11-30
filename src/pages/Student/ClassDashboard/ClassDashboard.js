@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import styles from './ClassDashboard.module.scss';
 import AttendanceModal from '../../../components/Student/AttendanceModal/AttendanceModal';
-import Notification from '../../../components/Common/Notification/Notification';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { getClassData } from '../../../services/api';
@@ -108,6 +107,11 @@ const ClassDashboard = () => {
       // For now, just show success
       setShowModal(false);
       setNotification({ show: true, message: 'Điểm danh thành công' });
+      
+      // Auto-hide notification after 3 seconds
+      setTimeout(() => {
+        setNotification({ show: false, message: '' });
+      }, 3000);
     } catch (err) {
       alert('Điểm danh thất bại, vui lòng thử lại');
     }
@@ -124,6 +128,11 @@ const ClassDashboard = () => {
     // TODO: Call real feedback API when available
     setShowFeedbackModal(false);
     setNotification({ show: true, message: 'Gửi feedback thành công! Cảm ơn bạn đã đóng góp ý kiến.' });
+    
+    // Auto-hide notification after 3 seconds
+    setTimeout(() => {
+      setNotification({ show: false, message: '' });
+    }, 3000);
   };
 
   const renderSessionInfo = () => {
@@ -204,11 +213,11 @@ const ClassDashboard = () => {
                       {s.key === 'attendance' && (
                         <div>
                           <button 
-                            className="btn btn-light" 
+                            className="btn btn-info" 
                             onClick={() => setShowModal(true)} 
                             disabled={!selectedSession || !currentUser.name}
                           >
-                            ☆ Điểm danh
+                            Điểm danh
                           </button>
                           {!currentUser.name && (
                             <small className="text-muted ms-2">Vui lòng đăng nhập để điểm danh</small>
@@ -218,7 +227,7 @@ const ClassDashboard = () => {
                       {s.key === 'quiz' && (
                         <div>
                           <button 
-                            className="btn btn-light" 
+                            className="btn btn-info" 
                             onClick={() => navigate('/class/quiz/:quizId')} 
                             disabled={!selectedSession || !currentUser.name}
                           >
@@ -232,7 +241,7 @@ const ClassDashboard = () => {
                       {s.key === 'feedback' && (
                         <div>
                           <button 
-                            className="btn btn-success" 
+                            className="btn btn-info" 
                             onClick={() => setShowFeedbackModal(true)} 
                             disabled={!selectedSession || !currentUser.name}
                           >
@@ -268,11 +277,11 @@ const ClassDashboard = () => {
           onConfirm={handleConfirm}
           defaultUser={currentUser}
         />
-        <Notification
-          show={notification.show}
-          message={notification.message}
-          onClose={() => setNotification({ ...notification, show: false })}
-        />
+        {notification.show && (
+          <div className={styles.notification}>
+            {notification.message}
+          </div>
+        )}
         <FeedbackModal
           show={showFeedbackModal}
           onClose={() => setShowFeedbackModal(false)}

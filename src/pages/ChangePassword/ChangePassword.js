@@ -14,6 +14,7 @@ function ChangePassword({ onSubmit }) {
     confirm: '',
   });
   const [error, setError] = useState('');
+  const [notification, setNotification] = useState({ show: false, message: '' });
   const isDisabled = !form.username || !form.oldPassword || !form.newPassword || !form.confirm || form.newPassword !== form.confirm;
 
   const handleChange = (e) => {
@@ -27,6 +28,16 @@ function ChangePassword({ onSubmit }) {
       setError('Mật khẩu mới và xác nhận không khớp');
       return;
     }
+    
+    // Show success notification
+    setNotification({ show: true, message: 'Đổi mật khẩu thành công! Vui lòng đăng nhập lại.' });
+    
+    // Navigate to homepage after 2 seconds
+    setTimeout(() => {
+      const userRole = localStorage.getItem('role') || role || 'student';
+      navigate(`/`);
+    }, 2000);
+    
     if (onSubmit) onSubmit(form);
   };
   const Back2Home = () => {
@@ -35,6 +46,13 @@ function ChangePassword({ onSubmit }) {
   return (
     <div className={styles.container}>
       <Header />
+      
+      {notification.show && (
+        <div className={styles.notification}>
+          {notification.message}
+        </div>
+      )}
+      
       <div className={styles.content}>
         <h2 className={styles.title}>THAY ĐỔI MẬT KHẨU</h2>
         <div className={styles.body}>
@@ -48,7 +66,7 @@ function ChangePassword({ onSubmit }) {
             <label className={styles.label}>Confirm</label>
             <input name="confirm" type="password" value={form.confirm} onChange={handleChange} className={styles.input} />
             {error && <div className={styles.error}>{error}</div>}
-            <button className={styles.submitBtn} disabled={isDisabled}>Tiếp tục</button>
+            <button className={styles.submitBtn} onClick={onSubmit}>Tiếp tục</button>
           </form>
         </div>
       </div>
