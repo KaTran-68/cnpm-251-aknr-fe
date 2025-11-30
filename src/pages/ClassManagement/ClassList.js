@@ -116,10 +116,10 @@ export default function ClassList() {
         {/* ----- STATISTIC CARDS (Unified Format) ----- */}
         <div className={styles.statsRow}>
           {[
-            { title: "Tổng số lớp", num: stats.total, icon: <FaBookOpen />, color: "Orange" },
+            { title: "Tổng số lớp", num: stats.total, icon: <FaBookOpen />, color: "Green" },
             { title: "Sắp diễn ra", num: stats.upcoming, icon: <FaRegClock />, color: "Purple" },
             { title: "Đã kết thúc", num: stats.done, icon: <FaCheckCircle />, color: "Blue" },
-            { title: "Chờ xác nhận", num: stats.pending, icon: <FaRegClock />, color: "Green" },
+            { title: "Chờ xác nhận", num: stats.pending, icon: <FaRegClock />, color: "Orange" },
             { title: "Đã bị hủy", num: stats.cancel, icon: <FaUsers />, color: "Red" },
           ].map((item, idx) => (
             <div className={styles.statCard} key={idx}>
@@ -168,9 +168,7 @@ export default function ClassList() {
               {uniqueSubjects.map((subject, idx) => (
                 <option key={idx} value={subject}>{subject}</option>
               ))}
-            </select>
-
-            <button className={styles.searchBtn}>Tìm kiếm</button>
+            </select> 
           </div>
 
         {/* Class Cards */}

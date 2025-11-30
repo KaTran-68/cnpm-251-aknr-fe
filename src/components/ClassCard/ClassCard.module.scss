@@ -20,6 +20,7 @@
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 2px;
+  text-align: left;
 }
 
 /* Môn học */
@@ -27,6 +28,7 @@
   font-size: 14px;
   color: #555;
   margin: 0;
+  text-align: left;
 }
 
 /* STATUS TAG */
@@ -44,8 +46,8 @@
 }
 
 .statusPending {
-  background: #eaffea;
-  color: #2ea54a;
+  background: #ffe8e8;
+  color: #e0ad4d;
 }
 
 .statusEnded {
