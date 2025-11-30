@@ -153,6 +153,9 @@ const ConfirmSchedule = () => {
                               Từ chối
                             </button>
                           </td>
+                          <td>
+                            <button className={styles.btnReject}>Từ chối</button>
+                          </td>
                         </tr>
                       ))
                     ) : (
