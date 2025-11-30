@@ -189,3 +189,39 @@
   border-radius: 20px;
   padding: 20px;
 }
+
+/* ------------------ NOTIFICATION ------------------ */
+
+.notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  z-index: 1000;
+  animation: slideInRight 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification.success {
+  background: #10b981;
+  color: #fff;
+}
+
+.notification.error {
+  background: #ef4444;
+  color: #fff;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

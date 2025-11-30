@@ -81,16 +81,54 @@ const RegisterSchedule = () => {
   const submit = (e) => {
     e.preventDefault();
     
-    // Validate time before submission
+    // Validate all fields
+    if (!day) {
+      alert("Vui lòng chọn ngày trong tuần");
+      return;
+    }
+    
+    if (!shift) {
+      alert("Vui lòng chọn thời gian ca học");
+      return;
+    }
+    
     const error = validateTime(startTime);
     if (error) {
       setTimeError(error);
       return;
     }
     
-    // TODO: integrate API
-    // eslint-disable-next-line no-console
-    console.log({ day, duration, shift, startTime, place });
+    if (!place) {
+      alert("Vui lòng nhập địa điểm");
+      return;
+    }
+    
+    // Calculate end time based on shift duration
+    const [hours, minutes] = startTime.split(':').map(Number);
+    const shiftHours = parseInt(shift.split(' ')[0]); // Extract number from "1 tiếng", "2 tiếng", etc.
+    const endHours = hours + shiftHours;
+    const endTime = `${String(endHours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    
+    // Add new class to the table
+    const newClass = {
+      id: availableClasses.length + 1,
+      thu: day,
+      time: `${startTime}-${endTime}`,
+      place: place,
+    };
+    
+    setAvailableClasses([...availableClasses, newClass]);
+    
+    // Clear form
+    setDay("");
+    setShift("");
+    setStartTime("");
+    setPlace("");
+    setTimeError("");
+  };
+  
+  const handleDeleteClass = (id) => {
+    setAvailableClasses(availableClasses.filter(item => item.id !== id));
   };
   
   const role = localStorage.getItem('role') || 'tutor';
@@ -165,7 +203,12 @@ const RegisterSchedule = () => {
                           <td>{r.time}</td>
                           <td>{r.place}</td>
                           <td>
-                            <button className={styles.btnDanger}>XÓA CA</button>
+                            <button 
+                              className={styles.btnDanger}
+                              onClick={() => handleDeleteClass(r.id)}
+                            >
+                              XÓA CA
+                            </button>
                           </td>
                         </tr>
                       ))
