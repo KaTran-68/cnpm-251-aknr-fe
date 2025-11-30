@@ -43,6 +43,7 @@
   font-size: 18px;
   font-weight: 500;
 }
+
 .statNumber {
   margin-top: 4px;
   font-size: 32px;
@@ -57,13 +58,40 @@
   align-items: center;
   justify-content: center;
 }
+
 .iconMain {
-  font-size: 28px;
+  font-size: 36px;
+  height: 100%;
+  width: 100%;
+  margin: 4;
+  padding: 0;
+  vertical-align: middle;
 }
-.iconBlue { background: #e8f0ff; color: #1780d2; }
-.iconPurple { background: #f5e9ff; color: #A000FF; }
-.iconGreen { background: #eaffea; color: #2ea54a; }
-.iconRed { background: #ffe8e8; color: #d93c3c; }
+
+.iconBlue {
+  background: #e8f0ff;
+  color: #1780d2;
+}
+
+.iconPurple {
+  background: #f5e9ff;
+  color: #A000FF;
+}
+
+.iconGreen {
+  background: #eaffea;
+  color: #2ea54a;
+}
+
+.iconRed {
+  background: #ffe8e8;
+  color: #d93c3c;
+}
+
+.iconOrange {
+  background: #ffe8e8;
+  color: #e0ad4d;
+}
 
 /* WHITE CONTENT AREA */
 .whiteBox {
@@ -71,8 +99,8 @@
   margin: 20px 40px;
   padding: 30px;
   border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.15);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* FILTERS */
@@ -83,7 +111,8 @@
   margin-bottom: 25px;
 }
 
-.input, .select {
+.input,
+.select {
   padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid #bbb;
@@ -106,4 +135,3 @@
   gap: 30px;
   margin-top: 10px;
 }
-
