@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './AttendanceModal.module.scss';
 
 const defaultForm = {
-  studentName: '',
-  studentId: '',
-  password: '',
+  studentName: 'Nguyễn Văn A1',
+  studentId: '24101100',
+  password: '123',
 };
 
 const AttendanceModal = ({ show, onClose, onConfirm, defaultUser }) => {

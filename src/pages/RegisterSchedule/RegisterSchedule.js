@@ -35,9 +35,59 @@ const RegisterSchedule = () => {
   const [place, setPlace] = useState("");
   const [availableClasses, setAvailableClasses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [timeError, setTimeError] = useState("");
+
+  const validateTime = (time) => {
+    // Check if time matches HH:MM format
+    const timeRegex = /^([0-1]?[0-9]|2[0-4]):([0-5][0-9])$/;
+    
+    if (!time) {
+      return "Vui lòng nhập thời gian bắt đầu";
+    }
+    
+    if (!timeRegex.test(time)) {
+      return "Định dạng thời gian không hợp lệ. Vui lòng nhập theo định dạng HH:MM (Ví dụ: 13:00)";
+    }
+    
+    const [hours, minutes] = time.split(':').map(Number);
+    
+    if (hours < 0 || hours > 24) {
+      return "Giờ phải từ 00 đến 24";
+    }
+    
+    if (hours === 24 && minutes > 0) {
+      return "Thời gian 24:00 không được có phút";
+    }
+    
+    if (minutes < 0 || minutes > 59) {
+      return "Phút phải từ 00 đến 59";
+    }
+    
+    return "";
+  };
+
+  const handleTimeChange = (e) => {
+    const value = e.target.value;
+    setStartTime(value);
+    
+    if (value) {
+      const error = validateTime(value);
+      setTimeError(error);
+    } else {
+      setTimeError("");
+    }
+  };
 
   const submit = (e) => {
     e.preventDefault();
+    
+    // Validate time before submission
+    const error = validateTime(startTime);
+    if (error) {
+      setTimeError(error);
+      return;
+    }
+    
     // TODO: integrate API
     // eslint-disable-next-line no-console
     console.log({ day, duration, shift, startTime, place });
@@ -165,7 +215,7 @@ const RegisterSchedule = () => {
               className={styles.input}
               placeholder="Nhập thời gian bắt đầu (Ví dụ: 13:00)"
               value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
+              onChange={handleTimeChange}
             />
             <input
               className={styles.input}
@@ -173,10 +223,15 @@ const RegisterSchedule = () => {
               value={place}
               onChange={(e) => setPlace(e.target.value)}
             />
-            <button type="submit" className={styles.btnPrimary}>
-              Nhập
-            </button>
           </div>
+          {timeError && (
+            <div style={{ color: 'red', fontSize: '0.9rem', marginBottom: '12px' }}>
+              {timeError}
+            </div>
+          )}
+          <button type="submit" className={styles.btnSubmit}>
+            Nhập
+          </button>
         </form>
       </div>
 

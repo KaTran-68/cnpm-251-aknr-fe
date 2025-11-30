@@ -29,7 +29,7 @@
 
 .btnBack {
   position: absolute;
-  left: 0;
+  left: -10rem;
   background: #4a9fd8;
   color: #fff;
   border: none;
@@ -159,10 +159,6 @@
   margin-bottom: 12px;
 }
 
-.formRow:last-child {
-  grid-template-columns: 1fr 1fr auto;
-}
-
 .daySelect,
 .select {
   background: #fff;
@@ -203,6 +199,23 @@
 }
 
 .btnPrimary:hover {
+  background: #2f855a;
+}
+
+.btnSubmit {
+  background: #38a169;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.btnSubmit:hover {
   background: #2f855a;
 }
 
